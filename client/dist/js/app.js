@@ -44181,6 +44181,7 @@
 	    _this.state = {
 	      errors: {},
 	      user: {
+	        username: '',
 	        email: '',
 	        name: '',
 	        password: '',
@@ -44209,11 +44210,12 @@
 	      event.preventDefault();
 
 	      // create a string for an HTTP body message
+	      var username = encodeURIComponent(this.state.user.username);
 	      var name = encodeURIComponent(this.state.user.name);
 	      var email = encodeURIComponent(this.state.user.email);
 	      var password = encodeURIComponent(this.state.user.password);
 	      var location = encodeURIComponent(this.state.user.location);
-	      var formData = 'name=' + name + '&email=' + email + '&password=' + password + '&location=' + location;
+	      var formData = 'username=' + username + '&name=' + name + '&email=' + email + '&password=' + password + '&location=' + location;
 
 	      // create an AJAX request
 	      var xhr = new XMLHttpRequest();
@@ -44344,6 +44346,17 @@
 	        'p',
 	        { className: 'error-message' },
 	        errors.summary
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'field-line' },
+	        _react2.default.createElement(_TextField2.default, {
+	          floatingLabelText: 'Username',
+	          name: 'username',
+	          errorText: errors.name,
+	          onChange: onChange,
+	          value: user.name
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
