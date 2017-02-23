@@ -1,5 +1,10 @@
 const jwt = require('jsonwebtoken');
 const User = require('mongoose').model('User');
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> (debug) fixed errors with .env file
 
 /**
  *  The Auth Checker middleware function.
