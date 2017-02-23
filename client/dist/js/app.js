@@ -44352,10 +44352,11 @@
 	        { className: 'field-line' },
 	        _react2.default.createElement(_TextField2.default, {
 	          floatingLabelText: 'Username',
+	          type: 'username',
 	          name: 'username',
-	          errorText: errors.name,
+	          errorText: errors.username,
 	          onChange: onChange,
-	          value: user.name
+	          value: user.username
 	        })
 	      ),
 	      _react2.default.createElement(
@@ -44363,6 +44364,7 @@
 	        { className: 'field-line' },
 	        _react2.default.createElement(_TextField2.default, {
 	          floatingLabelText: 'Name',
+	          type: 'name',
 	          name: 'name',
 	          errorText: errors.name,
 	          onChange: onChange,
