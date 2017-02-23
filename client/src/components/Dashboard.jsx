@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
-import Nav from './subcomponents/Nav.jsx';
 import EventDetail from './subcomponents/EventDetail.jsx';
 import Map from './subcomponents/Map.jsx';
 import EventList from './subcomponents/eventList.jsx';
@@ -12,7 +11,6 @@ const Dashboard = ({ data, setEveList, setDetBox }) => (
       subtitle="You should get access to this page only after authentication."
     />
     <div>
-      <Nav />
       <section id="eventpagebody">
         <section id="map" className="col-lg-4">
           <section >
