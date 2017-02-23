@@ -12,6 +12,11 @@ const Base = ({ children }) => (
 
       {Auth.isUserAuthenticated() ? (
         <div className="top-bar-right">
+          <IndexLink
+            activeClassName="active"
+            to="/"
+          ><strong>Events</strong></IndexLink>&nbsp;
+          <IndexLink activeClassName="active" to="/userpage">Profile</IndexLink>&nbsp;
           <Link to="/logout">Log out</Link>
         </div>
       ) : (
