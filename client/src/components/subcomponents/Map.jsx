@@ -57,7 +57,6 @@ class Map extends React.Component {
   }
 
   componentWillMount() {
-
     navigator.geolocation.getCurrentPosition((location) => {
       this.setState({ location: location.coords });
     });

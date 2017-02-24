@@ -20,6 +20,7 @@ const EventForm = () => {
     // busLink: String, // url to business' homepage
     // description: String,
 
+
     <form action="/makeevent" method="post">
       <div>
         <TextField
