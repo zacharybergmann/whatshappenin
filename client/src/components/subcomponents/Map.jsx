@@ -50,23 +50,24 @@ class Map extends React.Component {
         latitude: null,
         longitude: null,
       },
-    };
-
-    console.log(this.state.googleKey);
+      googleKey: null,
+    }
   }
 
   componentWillMount() {
-    fetch('/googlekey').then((response) => response.json())
-    .then(key=>{
-      this.setState({googleKey:key})
-      console.log(this.state);
-    });
+
     navigator.geolocation.getCurrentPosition((location) => {
       this.setState({ location: location.coords });
+    });
+    fetch('/googlekey')
+    .then((response) => response.json())
+    .then(key=>{
+      this.setState({googleKey:key});
     });
   }
 
   render() {
+    console.log(this.state);
     return (
       <Gmaps
         width={'500px'}
