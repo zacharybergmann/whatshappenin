@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import EventList from './subcomponents/eventList.jsx';
-
+import EventForm from './subcomponents/EventForm.jsx';
 
 class UserPage extends Component {
   constructor() {
@@ -36,7 +36,7 @@ class UserPage extends Component {
       <main className="container">
         <div id="userpage">
           <section>
-            <h1>Userinfo</h1>
+            <EventForm />
           </section>
           <section id="userprofile" className="col-lg-4" />
           <sidebar className="col-lg-4">

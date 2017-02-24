@@ -1,12 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const path = require('path');
-
+const Event = require('./server/controllers/events');
 
 require('dotenv').config();
 // connect to the database and load models
-require('./server/models').connect(process.env.MONGO_KEY);
+require('./server/models').connect(process.env.EPMONGO || process.env.MONGO_KEY);
 
 const app = express();
 // tell the app to look for static files in these directories
@@ -32,12 +31,33 @@ const authRoutes = require('./server/routes/auth');
 const apiRoutes = require('./server/routes/api');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './server/static/index.html'));
+app.get('/googlekey', (req, res) => {
+  res.status(200).json(process.env.GOOGLE_MAP);
 });
 
+app.post('/makeevent', (req, res, next) => {
+  console.log(req.body, 'event body');
+  Event.createEvent(req.body);
+  res.send('event made');
+});
 
+/**
+ * Route to get events for both user, and events page
+ * @param req.body, if it contains the username, then get
+ * that user's events
+ * @return Sets the state detailbox to the clicked event
+ */
+app.get('/events', (req, res) => {
+  if (!req.body.username) {
+    Event.findAll().then(events => res.send(events));
+  } else {
+    res.json(Event.findUserevent(req.body.username));
+  }
+});
+
+app.get('/users', (req, res) => {
+
+})
 // start the server
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server is running on http://localhost:3000 or http://127.0.0.1:3000');
