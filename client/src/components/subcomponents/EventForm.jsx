@@ -8,6 +8,7 @@ const style = {
 };
 
 const EventForm = () => {
+
   return (
     // username: String,
     // name: String,
@@ -32,6 +33,7 @@ const EventForm = () => {
         <TextField
           name="location"
           type="location"
+          value={Form.location}
           hintText="Where tha party at?!"
           style={style}
         />
@@ -39,6 +41,7 @@ const EventForm = () => {
       <div>
         <TextField
           name="time"
+          type="time" value={Form.time}
           hintText="When I gotta be there?" style={style}
         />
       </div>
