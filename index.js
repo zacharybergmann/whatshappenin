@@ -1,6 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+<<<<<<< HEAD
+=======
+const config = require('./config');
+const path = require('path');
+>>>>>>> (feature) add capability to type in url path and receive the correct page, add component for NotFound page, add catch-all route for nonexistent paths to route to NotFound
 
 require('dotenv').config();
 // connect to the database and load models
@@ -30,6 +35,10 @@ const authRoutes = require('./server/routes/auth');
 const apiRoutes = require('./server/routes/api');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './server/static/index.html'));
+});
 
 
 // start the server
