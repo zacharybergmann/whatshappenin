@@ -48,7 +48,6 @@ class LoginPage extends React.Component {
     const password = encodeURIComponent(this.state.user.password);
     const formData = `email=${email}&password=${password}`;
 
-
     fetch('/auth/login', {
       method: 'POST',
       headers: new Headers({
