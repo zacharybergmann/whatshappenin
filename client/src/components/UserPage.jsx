@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import EventList from './subcomponents/eventList.jsx';
 import EventForm from './subcomponents/EventForm.jsx';
+
 import EventDetail from './subcomponents/EventDetail.jsx';
+
 class UserPage extends Component {
   constructor() {
     super();
