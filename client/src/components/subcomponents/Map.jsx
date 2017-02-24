@@ -57,11 +57,7 @@ class Map extends React.Component {
   }
 
   componentWillMount() {
-    fetch('/googlekey').then((response) => response.json())
-    .then(key=>{
-      this.setState({googleKey:key})
-      console.log(this.state);
-    });
+
     navigator.geolocation.getCurrentPosition((location) => {
       this.setState({ location: location.coords });
     });
@@ -73,6 +69,7 @@ class Map extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <Gmaps
         width={'500px'}
