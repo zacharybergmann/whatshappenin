@@ -34,6 +34,7 @@ app.use('/api', apiRoutes);
 app.get('/googlekey', (req, res) => {
   res.status(200).json(process.env.GOOGLE_MAP);
 });
+<<<<<<< HEAD
 
 app.post('/makeevent', (req, res, next) => {
   console.log(req.body, 'event body');
@@ -56,6 +57,8 @@ app.get('/events', (req, res) => {
 });
 
 app.get('/users', (req, res) => {
+=======
+>>>>>>> (feature) added request for Googlemaps key for maps functionality
 
 })
 // start the server
