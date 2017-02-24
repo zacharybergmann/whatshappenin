@@ -1,7 +1,6 @@
 import React from 'react';
-import fetch from 'react-fetch';
+// import fetch from 'react-fetch';
 import { Gmaps, Marker, InfoWindow } from 'react-gmaps';
-
 
 class Map extends React.Component {
 
@@ -52,9 +51,16 @@ class Map extends React.Component {
         longitude: null,
       },
     };
+
+    console.log(this.state.googleKey);
   }
 
   componentWillMount() {
+    fetch('/googlekey').then((response) => response.json())
+    .then(key=>{
+      this.setState({googleKey:key})
+      console.log(this.state);
+    });
     navigator.geolocation.getCurrentPosition((location) => {
       this.setState({ location: location.coords });
     });
@@ -63,13 +69,13 @@ class Map extends React.Component {
   render() {
     return (
       <Gmaps
-        width={'600px'}
+        width={'500px'}
         height={'400px'}
         lat={this.state.location.latitude}
         lng={this.state.location.longitude}
         zoom={12}
         loadingMessage={'Be happy'}
-        params={{ v: '3.exp', key: process.env.GOOGLE_MAP }}
+        params={{ v: '3.exp', key: this.state.googleKey }}
         onMapCreated={this.onMapCreated}
       >
         <Marker

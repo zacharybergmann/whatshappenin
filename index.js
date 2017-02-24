@@ -30,7 +30,9 @@ const authRoutes = require('./server/routes/auth');
 const apiRoutes = require('./server/routes/api');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
-
+app.get('/googlekey', (req, res) => {
+  res.status(200).json(process.env.GOOGLE_MAP);
+});
 
 // start the server
 app.listen(process.env.PORT || 3000, () => {

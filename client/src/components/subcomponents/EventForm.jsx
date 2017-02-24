@@ -20,7 +20,7 @@ const EventForm = () => {
   };
   return (
 
-    <form onSubmit={logForm} >
+    <form>
       <div>
         <TextField
           name="name"
