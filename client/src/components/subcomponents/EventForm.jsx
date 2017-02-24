@@ -26,7 +26,7 @@ const EventForm = () => {
           name="name"
           type="name"
           value={Form.name}
-          hintText="what goes in here"
+          hintText="Who are you?"
           style={style}
         />
       </div>
