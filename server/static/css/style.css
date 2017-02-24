@@ -44,8 +44,14 @@ a:hover {
 
 .container {
   margin: 0 auto;
-  text-align: center;
-  width: 700px;
+  width: 1000px;
+}
+sidebar {
+  padding-left: 20px;
+}
+article.eventdetail {
+  border-bottom-style: groove;
+  margin-bottom: 5px;
 }
 
 .card-heading {
@@ -53,7 +59,7 @@ a:hover {
 }
 
 .field-line, .button-line {
-  padding: 16px;
+  padding: 5px;
 }
 
 .error-message {
@@ -64,4 +70,14 @@ a:hover {
 .success-message {
   padding: 0 16px;
   color: green;
+}
+#userpage {
+  display:flex;
+}
+#eventpagebody {
+  display : flex;
+}
+img {
+  max-width: 40px;
+  max-height: 40px;
 }
