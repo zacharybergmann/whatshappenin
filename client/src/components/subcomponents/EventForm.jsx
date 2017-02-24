@@ -19,14 +19,25 @@ const EventForm = () => {
     console(event, user);
   };
   return (
+    // username: String,
+    // name: String,
+    // eventTime: String,
+    // location: String,
+    // createdAt: String, // In the format of "2/16/2017, 8:28:03 PM"
+    // tags: String,
+    // businessName: String,
+    // picLink: String, // Link to hosted picture
+    // busLink: String, // url to business' homepage
+    // description: String,
 
-    <form>
+    <form action="/makeevent" method="post">
+
       <div>
         <TextField
           name="name"
           type="name"
           value={Form.name}
-          hintText="what goes in here"
+          hintText="Who are you?"
           style={style}
         />
       </div>
@@ -42,16 +53,24 @@ const EventForm = () => {
       <div>
         <TextField
           name="time"
-          type="time" value={Form.time}
+          type="time" value={Form.eventTime}
           hintText="When I gotta be there?" style={style}
         />
       </div>
       <div>
         <TextField
-          name="friends"
-          type="friends"
-          value={Form.friends}
-          hintText="Can I bring somebody?" style={style}
+          name="description"
+          type="description"
+          value={Form.description}
+          hintText="Describe your sweet event" style={style}
+        />
+      </div>
+      <div>
+        <TextField
+          name="tags"
+          type="tags"
+          value={Form.tags}
+          hintText="tags" style={style}
         />
       </div>
       <div>
