@@ -1,7 +1,7 @@
 {
   "name": "authentication-in-react-apps",
   "version": "1.0.0",
-  "description": "Authentication in React Applications, Part 2: JSON Web Token (JWT)",
+  "description": "DeGreenfields",
   "main": "index.js",
   "scripts": {
     "start": "npm run bundle && node index.js",
@@ -13,12 +13,13 @@
     "url": "https://github.com/vladimirponomarev/authentication-in-react-apps.git"
   },
   "author": "DeGreenfields",
-  "license": "non-licenseS",
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^1.0.2",
     "body-parser": "^1.15.2",
     "dotenv": "^4.0.0",
     "express": "^4.14.0",
+    "fs": "0.0.1-security",
     "jsonwebtoken": "^7.2.1",
     "material-ui": "^0.16.5",
     "mongoose": "^4.7.3",
