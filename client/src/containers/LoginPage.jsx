@@ -66,7 +66,6 @@ class LoginPage extends React.Component {
       this.setState({
         errors: err,
       });
-
     });
   }
 

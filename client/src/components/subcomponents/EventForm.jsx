@@ -25,7 +25,8 @@ const EventForm = () => {
         <TextField
           name="name"
           type="name"
-          hintText="Who are you?"
+          value={Form.name}
+          hintText="what goes in here"
           style={style}
         />
       </div>
