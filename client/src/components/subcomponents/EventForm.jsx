@@ -8,16 +8,6 @@ const style = {
 };
 
 const EventForm = () => {
-  let Form = {
-    name: '',
-    location: '',
-    time: '',
-    friends: '',
-  };
-
-  const logForm = function (event) {
-    console(event, user);
-  };
   return (
     // username: String,
     // name: String,
@@ -31,11 +21,13 @@ const EventForm = () => {
     // description: String,
 
     <form action="/makeevent" method="post">
+
       <div>
         <TextField
           name="name"
           type="name"
           value={Form.name}
+
           hintText="Who are you?"
           style={style}
         />
