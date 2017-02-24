@@ -8,16 +8,7 @@ const style = {
 };
 
 const EventForm = () => {
-  let Form = {
-    name: '',
-    location: '',
-    time: '',
-    friends: '',
-  };
 
-  const logForm = function (event) {
-    console(event, user);
-  };
   return (
     // username: String,
     // name: String,
