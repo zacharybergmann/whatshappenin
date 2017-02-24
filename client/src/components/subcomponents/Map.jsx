@@ -52,9 +52,16 @@ class Map extends React.Component {
       },
       googleKey: null,
     };
+
+    console.log(this.state.googleKey);
   }
 
   componentWillMount() {
+    fetch('/googlekey').then((response) => response.json())
+    .then(key=>{
+      this.setState({googleKey:key})
+      console.log(this.state);
+    });
     navigator.geolocation.getCurrentPosition((location) => {
       this.setState({ location: location.coords });
     });
