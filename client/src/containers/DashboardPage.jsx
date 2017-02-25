@@ -44,6 +44,12 @@ class DashboardPage extends React.Component {
    * This method will be executed after initial rendering.
    */
   componentDidMount() {
+    /**
+   *
+   * @param {none} sets security token
+   * @returns sets secret message on state for authorization
+   * with the given location
+   */
     fetch('/api/dashboard', {
       method: 'GET',
       headers: new Headers({
@@ -78,6 +84,7 @@ class DashboardPage extends React.Component {
     this.setState({ eventList });
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
   setCoordinates(location) {
@@ -85,6 +92,14 @@ class DashboardPage extends React.Component {
   }
 
 =======
+=======
+  /**
+ *
+ * @param {location} will be a set of coordinates
+ * @returns Sets the state coordinates, for each event list member
+ * allowing for the map to be updated
+ */
+>>>>>>> (debug) Fix error which caused all events to locate at user's present location
   setCoordinates(location) {
     this.setState({ location });
   }
