@@ -1,7 +1,16 @@
 const Event = require('../models/event.js');
 
-const createEvent = function (event) {
-  Event(event).save();
+const Events = {
+  createEvent(event) {
+    Event(event).save();
+  },
+  findAll() {
+    return Event.find()
+  },
+  findUserevent(user) {
+    return Event.find().where({ username: user })
+      .then(events => events);
+  }
 };
 
-module.exports = createEvent;
+module.exports = Events;

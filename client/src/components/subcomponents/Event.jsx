@@ -12,10 +12,11 @@ const Event = (props) => {
   return (
     <article className="eventdetail">
       <div className="eventlistbox">
-        <a onClick={setDetailsBox}>Eventheader</a>
-        <div>eventTime: Date,{props.event}</div>
-        <a>location: String, link to map</a>
-        <p> full event description</p>
+        <a onClick={setDetailsBox}>{props.event.name}</a>
+        <div>eventTime: {props.event.time}.</div>
+        <a>location:{props.event.location}</a>
+        <p>{props.event.description}</p>
+        <div>{props.event.tags}</div>
       </div>
     </article>
 
