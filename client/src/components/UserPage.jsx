@@ -11,13 +11,14 @@ class UserPage extends Component {
       eventList: [],
       detailsBox: { name: 'name' },
       location: {
-        longitude: 'longitude',
-        latitude: 'latitude',
+        longitude: null,
+        latitude: null,
       }
     };
     this.setDetailsBox = this.setDetailsBox.bind(this);
     this.setCoordinates = this.setCoordinates.bind(this);
     this.geoCode = this.geoCode.bind(this);
+    this.setCoordinates = this.setCoordinates.bind(this);
   }
   componentWillMount() {
     /**
@@ -49,8 +50,6 @@ class UserPage extends Component {
   setCoordinates(location) {
     this.setState({ location });
   }
-
-
   geoCode(location) {
     this.setState({ location });
   }

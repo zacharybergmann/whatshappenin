@@ -72,8 +72,7 @@ class DashboardPage extends React.Component {
   setEventList(eventList) {
     this.setState({ eventList });
   }
-
-  /**
+/**
  *
  * @param {location} will be a set of coordinates
  * @returns Sets the state coordinates, for each event list member
