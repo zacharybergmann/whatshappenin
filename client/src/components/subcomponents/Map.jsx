@@ -51,23 +51,21 @@ class Map extends React.Component {
         longitude: null,
       },
       googleKey: null,
-    }
+    };
   }
 
   componentWillMount() {
-
     navigator.geolocation.getCurrentPosition((location) => {
       this.setState({ location: location.coords });
     });
     fetch('/googlekey')
-    .then((response) => response.json())
-    .then(key=>{
-      this.setState({googleKey:key});
+    .then(response => response.json())
+    .then((key) => {
+      this.setState({ googleKey: key });
     });
   }
 
   render() {
-    console.log(this.state);
     return (
       <Gmaps
         width={'500px'}

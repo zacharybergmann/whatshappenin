@@ -5,11 +5,11 @@ const EventDetail = props =>
     <img alt="" src="http://www.ufunk.net/wp-content/uploads/2013/03/thumbs-and-ammo-9.jpg" className="col-sm-2" />
     <section className="eventdescription">
       <div className="col-md-3">
-        <h3>Event name</h3>
-        <div>username: {props.event},</div>
-        <div>eventTime: Date,</div>
-        <a>location: String, link to map</a>
-        <p> full event description</p>
+        <a>{props.event.name}</a>
+        <div>eventTime: {props.event.time}.</div>
+        <a>location:{props.event.location}</a>
+        <p>{props.event.description}</p>
+        <div>{props.event.tags}</div>
       </div>
     </section>
   </article>;

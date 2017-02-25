@@ -37,12 +37,27 @@ app.get('/googlekey', (req, res) => {
 
 app.post('/makeevent', (req, res, next) => {
   console.log(req.body, 'event body');
-  Event(req.body);
+  Event.createEvent(req.body);
   res.send('event made');
 });
+
+/**
+ * Route to get events for both user, and events page
+ * @param req.body, if it contains the username, then get
+ * that user's events
+ * @return Sets the state detailbox to the clicked event
+ */
 app.get('/events', (req, res) => {
-  Event.find().then(events => res.send(events));
+  if (!req.body.username) {
+    Event.findAll().then(events => res.send(events));
+  } else {
+    res.json(Event.findUserevent(req.body.username));
+  }
 });
+
+app.get('/users', (req, res) => {
+
+})
 // start the server
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server is running on http://localhost:3000 or http://127.0.0.1:3000');

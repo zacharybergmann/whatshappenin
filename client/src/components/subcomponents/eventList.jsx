@@ -4,7 +4,7 @@ import Event from './Event.jsx';
 const EventList = ({ eventlist, setDetailsBox }) =>
   <div>
     {eventlist.map(event =>
-      <Event setDetailsBox={setDetailsBox} event={event} />,
+      <Event key={event.id} setDetailsBox={setDetailsBox} event={event} />,
     )}
   </div>;
 
