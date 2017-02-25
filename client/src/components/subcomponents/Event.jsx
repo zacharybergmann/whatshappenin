@@ -38,4 +38,5 @@ const Event = (props) => {
     </article>
   );
 };
+
 export default Event;
