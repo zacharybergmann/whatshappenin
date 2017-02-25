@@ -52,8 +52,6 @@ class Map extends React.Component {
       },
       googleKey: null,
     };
-
-    console.log(this.state.googleKey);
   }
 
   componentWillMount() {
@@ -68,7 +66,6 @@ class Map extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <Gmaps
         width={'500px'}

@@ -24,7 +24,6 @@ const EventForm = () => {
         <TextField
           name="name"
           type="name"
-          value={Form.name}
           hintText="Who are you?"
           style={style}
         />
