@@ -3,6 +3,7 @@ import HomePage from './components/HomePage.jsx';
 import DashboardPage from './containers/DashboardPage.jsx';
 import LoginPage from './containers/LoginPage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
+import NotFound from './components/notFound.jsx';
 import Auth from './modules/Auth';
 import UserPage from './components/UserPage.jsx'
 
@@ -43,6 +44,11 @@ const routes = {
         // change the current URL to /
         replace('/');
       },
+    },
+
+    {
+      path: '*',
+      component: NotFound,
     },
 
   ],
