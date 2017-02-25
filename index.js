@@ -44,7 +44,6 @@ app.post('/makeevent', (req, res) => {
   Event.createEvent(req.body);
   res.send('event made');
 });
-
 /**
  * Route to get events for both user, and events page
  * @param req.body, if it contains the username, then get

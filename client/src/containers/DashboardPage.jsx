@@ -2,16 +2,9 @@ import React from 'react';
 import Auth from '../modules/Auth';
 import Dashboard from '../components/Dashboard.jsx';
 
-/* global localStorage, XMLHttpRequest */
-
 class DashboardPage extends React.Component {
-
-  /**
-   * Class constructor.
-   */
   constructor(props) {
     super(props);
-
     this.state = {
       secretData: '',
       eventList: [],
