@@ -34,7 +34,6 @@ app.use('/api', apiRoutes);
 app.get('/googlekey', (req, res) => {
   res.status(200).json(process.env.GOOGLE_MAP);
 });
-<<<<<<< HEAD
 
 app.post('/makeevent', (req, res, next) => {
   console.log(req.body, 'event body');
@@ -59,17 +58,6 @@ app.get('/events', (req, res) => {
 app.get('/users', (req, res) => {
 
 })
-=======
-
-app.post('/makeevent', (req, res, next) => {
-  console.log(req.body, 'event body');
-  Event(req.body);
-  res.send('event made');
-});
-app.get('/events', (req, res) => {
-  Event.find().then(events => res.send(events));
-});
->>>>>>> a8048eeee0434f227162924b9eb065f8479bcad0
 // start the server
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server is running on http://localhost:3000 or http://127.0.0.1:3000');
