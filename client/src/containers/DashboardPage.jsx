@@ -70,6 +70,9 @@ class DashboardPage extends React.Component {
   setEventList(eventList) {
     this.setState({ eventList });
   }
+  setCoordinates(location) {
+    this.setState({ location });
+  }
   /**
  *
  * @param {location} a location to center the map component on click

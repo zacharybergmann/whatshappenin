@@ -4,7 +4,11 @@ import EventDetail from './subcomponents/EventDetail.jsx';
 import Map from './subcomponents/Map.jsx';
 import EventList from './subcomponents/eventList.jsx';
 
+<<<<<<< HEAD
 const Dashboard = ({ data, setEveList, setDetBox, setCoordinates, coordinates }) => (
+=======
+const Dashboard = ({ data, setEveList, setDetBox , setCoordinates , coordinates}) => (
+>>>>>>> (feature) Add component update controllers to map, allows event clicks to position map to even location
   <Card className="container">
     <CardTitle
       title="Dashboard"

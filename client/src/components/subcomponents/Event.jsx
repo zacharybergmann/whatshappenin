@@ -1,6 +1,6 @@
 import React from 'react';
 
-const parseCoordinates = (coordString) => {
+const parseCoordinates = function (coordString) {
   const coordinates = coordString.split(' ');
   const coordinateObj = {
     latitude: +coordinates[4],
