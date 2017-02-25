@@ -28,7 +28,7 @@ class DashboardPage extends React.Component {
      console.log(events, 'eventbox');
       this.setState({ eventList: events });
       this.setState({ detailsBox: events[0] });
-      console.log(this.state,'state');
+      // console.log(this.state,'state');
     }).catch(err => console.log(err));
 
     this.setDetailsBox = this.setDetailsBox.bind(this);
@@ -59,7 +59,7 @@ class DashboardPage extends React.Component {
    * @return Sets the state detailbox to the clicked event
    */
   setDetailsBox(detailsBox) {
-    console.warn(detailsBox, 'event');
+    // console.warn(detailsBox, 'event');
     this.setState({ detailsBox });
   }
 

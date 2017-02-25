@@ -29,20 +29,6 @@ class Map extends React.Component {
     console.log('onClick', e);
   }
 
-  static handleSubmit(event, search) {
-    event.preventDefault();
-
-    fetch(`http://maps.googleapis.com/maps/api/geocode/json?address=${search.value}`)
-    .then(response => response.json())
-    .then((json) => {
-      this.setState({
-        location: {
-          latitude: json.results[0].geometry.location.lat,
-          longitude: json.results[0].geometry.location.lng,
-        },
-      });
-    });
-  }
   constructor() {
     super();
     this.state = {
@@ -52,10 +38,11 @@ class Map extends React.Component {
       },
       googleKey: null,
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
-
     navigator.geolocation.getCurrentPosition((location) => {
       this.setState({ location: location.coords });
     });
@@ -65,33 +52,55 @@ class Map extends React.Component {
       this.setState({ googleKey: key });
     });
   }
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log('submit', this.state.search)
+    fetch(`http://maps.googleapis.com/maps/api/geocode/json?address=${this.state.search}`)
+    .then(response => response.json())
+    .then((json) => {
+      this.setState({
+        location: {
+          latitude: json.results[0].geometry.location.lat,
+          longitude: json.results[0].geometry.location.lng,
+        },
+      });
+    });
+    console.log(this.state.location,'location');
+  }
+  handleChange(event) {
+    this.setState({ search: event.target.value });
+  }
 
   render() {
-    console.log(this.state);
     return (
-      <Gmaps
-        width={'500px'}
-        height={'400px'}
-        lat={this.state.location.latitude}
-        lng={this.state.location.longitude}
-        zoom={12}
-        loadingMessage={'Be happy'}
-        params={{ v: '3.exp', key: this.state.googleKey }}
-        onMapCreated={this.onMapCreated}
-      >
-        <Marker
+      <div>
+        <form onSubmit={this.handleSubmit} >
+          <input id="address" name="location" onChange={this.handleChange} type="text" />
+          <input type="submit" value="Geocode" />
+        </form>
+        <Gmaps
+          width={'500px'}
+          height={'400px'}
           lat={this.state.location.latitude}
           lng={this.state.location.longitude}
-          draggable
-          onDragEnd={this.onDragEnd}
-        />
-        <InfoWindow
-          lat={this.state.location.latitude}
-          lng={this.state.location.longitude}
-          content={'Hello, React :)'}
-          onCloseClick={this.onCloseClick}
-        />
-      </Gmaps>
+          zoom={12}
+          loadingMessage={'Be happy'}
+          params={{ v: '3.exp', key: 'AIzaSyDr0vzKpPyWUghywsRJI9PXgOtNkVs2u3g' }}
+          onMapCreated={this.onMapCreated}
+        >
+          <Marker
+            lat={this.state.location.latitude}
+            lng={this.state.location.longitude}
+            draggable
+            onDragEnd={this.onDragEnd}
+          />
+          <InfoWindow
+            lat={this.state.location.latitude}
+            lng={this.state.location.longitude}
+            onCloseClick={this.onCloseClick}
+          />
+        </Gmaps>
+      </div>
     );
   }
 }
