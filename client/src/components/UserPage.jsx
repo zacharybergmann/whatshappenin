@@ -44,8 +44,8 @@ class UserPage extends Component {
         <div id="userpage">
           <section>
             <EventForm />
-          </section>
             <EventDetail event={this.state.detailsBox} />
+          </section>
           <section id="userprofile" className="col-lg-4" />
           <sidebar className="col-lg-4">
             <EventList

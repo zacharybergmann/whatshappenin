@@ -2,6 +2,8 @@ import React from 'react';
 // import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import TimePicker from 'material-ui/TimePicker'
+import DatePicker from 'material-ui/DatePicker';
 
 const style = {
   marginLeft: 20,
@@ -37,9 +39,17 @@ const EventForm = () => {
         />
       </div>
       <div>
-        <TextField
+        <TimePicker
           name="time"
-          hintText="When I gotta be there?" style={style}
+          hintText="12hr Format"
+          style={style}
+        />
+      </div>
+      <div>
+        <DatePicker
+          hintText="Portrait Dialog"
+          name="date"
+          style={style}
         />
       </div>
       <div>

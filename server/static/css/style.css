@@ -77,7 +77,7 @@ article.eventdetail {
 #eventpagebody {
   display : flex;
 }
-img {
+#image {
   max-width: 40px;
   max-height: 40px;
 }
