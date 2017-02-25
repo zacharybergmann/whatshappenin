@@ -21,11 +21,11 @@ const EventForm = () => {
     // description: String,
 
     <form action="/makeevent" method="post">
-
       <div>
         <TextField
           name="name"
           type="name"
+          value={Form.name}
           hintText="Who are you?"
           style={style}
         />
@@ -34,6 +34,7 @@ const EventForm = () => {
         <TextField
           name="location"
           type="location"
+          value={Form.location}
           hintText="Where tha party at?!"
           style={style}
         />
@@ -41,6 +42,7 @@ const EventForm = () => {
       <div>
         <TextField
           name="time"
+          type="time" value={Form.eventTime}
           hintText="When I gotta be there?" style={style}
         />
       </div>
@@ -48,6 +50,7 @@ const EventForm = () => {
         <TextField
           name="description"
           type="description"
+          value={Form.description}
           hintText="Describe your sweet event" style={style}
         />
       </div>
@@ -55,6 +58,7 @@ const EventForm = () => {
         <TextField
           name="tags"
           type="tags"
+          value={Form.tags}
           hintText="tags" style={style}
         />
       </div>
