@@ -15,11 +15,20 @@ const routes = {
     {
       path: '/',
       getComponent: (location, callback) => {
-        if (Auth.isUserAuthenticated()) {
-          callback(null, DashboardPage);
-        } else {
-          callback(null, HomePage);
-        }
+        fetch('/verify')
+        .then((status) => {
+          console.log(status);
+          if (status !== 400 || Auth.isUserAuthenticated()) {
+            callback(null, DashboardPage);
+          } else {
+            callback(null, HomePage);
+          }
+        });
+        // if (Auth.isUserAuthenticated()) {
+        //   callback(null, DashboardPage);
+        // } else {
+        //   callback(null, HomePage);
+        // }
       },
     },
 
@@ -44,6 +53,12 @@ const routes = {
         // change the current URL to /
         replace('/');
       },
+    },
+    {
+      path: '/auth/google/callback',
+      onEnter: (nextState, replace) => {
+        replace('/');
+      }
     },
 
     {

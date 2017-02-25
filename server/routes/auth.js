@@ -1,6 +1,8 @@
 const express = require('express');
 const validator = require('validator');
 const passport = require('passport');
+const User = require('../models/user.js');
+
 
 const router = new express.Router();
 
@@ -74,6 +76,7 @@ function validateLoginForm(payload) {
     errors,
   };
 }
+
 
 router.post('/signup', (req, res, next) => {
   const validationResult = validateSignupForm(req.body);

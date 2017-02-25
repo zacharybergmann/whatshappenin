@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const Event = require('./server/controllers/events');
@@ -13,28 +14,38 @@ app.use(express.static('./server/static/'));
 app.use(express.static('./client/dist/'));
 // tell the app to parse HTTP body messages
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({
+  secret: 'buttholes',
+  resave: false,
+  saveUninitialized: true,
+}));
 // pass the passport middleware
 app.use(passport.initialize());
+app.use(passport.session());
 
 // load passport strategies
 const localSignupStrategy = require('./server/passport/local-signup');
 const localLoginStrategy = require('./server/passport/local-login');
+const googleLoginStrategy = require('./server/passport/google-login');
+
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
+passport.use('google', googleLoginStrategy);
 
 // pass the authorization checker middleware
 const authCheckMiddleware = require('./server/middleware/auth-check');
+
 app.use('/api', authCheckMiddleware);
 
 // routes
 const authRoutes = require('./server/routes/auth');
 const apiRoutes = require('./server/routes/api');
+
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.get('/googlekey', (req, res) => {
   res.status(200).json(process.env.GOOGLE_MAP);
 });
-
 app.post('/makeevent', (req, res, next) => {
   console.log(req.body, 'event body');
   Event.createEvent(req.body);
@@ -57,7 +68,7 @@ app.get('/events', (req, res) => {
 
 app.get('/users', (req, res) => {
 
-})
+});
 // start the server
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server is running on http://localhost:3000 or http://127.0.0.1:3000');
