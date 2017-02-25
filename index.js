@@ -34,11 +34,9 @@ app.use('/api', apiRoutes);
 app.get('/googlekey', (req, res) => {
   res.status(200).json(process.env.GOOGLE_MAP);
 });
-<<<<<<< HEAD
 
 app.post('/makeevent', (req, res, next) => {
   console.log(req.body, 'event body');
-<<<<<<< HEAD
   Event.createEvent(req.body);
   res.send('event made');
 });
@@ -57,19 +55,10 @@ app.get('/events', (req, res) => {
   }
 });
 
+
 app.get('/users', (req, res) => {
-=======
->>>>>>> (feature) added request for Googlemaps key for maps functionality
 
 })
-=======
-  Event(req.body);
-  res.send('event made');
-});
-app.get('/events', (req, res) => {
-  Event.find().then(events => res.send(events));
-});
->>>>>>> (feature)Adds event controller, adds event submit route and submits events to database
 // start the server
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server is running on http://localhost:3000 or http://127.0.0.1:3000');

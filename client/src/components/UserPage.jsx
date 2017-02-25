@@ -1,34 +1,39 @@
 import React, { Component } from 'react';
 import EventList from './subcomponents/eventList.jsx';
 import EventForm from './subcomponents/EventForm.jsx';
-
+import EventDetail from './subcomponents/EventDetail.jsx';
 class UserPage extends Component {
   constructor() {
     super();
     this.state = {
-      eventList: ['userevent1', 'userevent2', 'userevent3', 'userevent4', 'userevent5'],
+      eventList: [],
       map: null,
-      detailsBox: null,
+      detailsBox: { name: 'name' },
     };
   }
+  componentWillMount() {
+    /**
+   *
+   * @param {events} a list of event objects from query
+   * @returns Sets the state eventlist to the array of events
+   */
+    fetch('/events').then(events => events.json())
+    .then((events) => {
+     console.log(events, 'eventbox');
+      this.setState({ eventList: events });
+      this.setState({ detailsBox: events[0] });
+      console.log(this.state,'state');
+    }).catch(err => console.log(err));
+  }
   /**
-   * Returns the sum of a and b
+   *
    * @param {event} the event object a user clicks on
    * @return Sets the state detailbox to the clicked event
    */
   setDetailsBox(detailsBox) {
-    console.warn(detailsBox, 'event');
     this.setState({ detailsBox });
   }
 
-  /**
- * Returns the sum of a and b
- * @param {events} a list of event objects from query
- * @returns Sets the state eventlist to the array of events
- */
-  setEventList(events) {
-    this.setState({ eventList: events });
-  }
 // need to add on mount that calls event list.
 // need will change that updates
   render() {
@@ -38,6 +43,7 @@ class UserPage extends Component {
           <section>
             <EventForm />
           </section>
+            <EventDetail event={this.state.detailsBox} />
           <section id="userprofile" className="col-lg-4" />
           <sidebar className="col-lg-4">
             <EventList
