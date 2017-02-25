@@ -40,6 +40,12 @@ class DashboardPage extends React.Component {
    * This method will be executed after initial rendering.
    */
   componentDidMount() {
+    /**
+   *
+   * @param {none} sets security token
+   * @returns sets secret message on state for authorization
+   * with the given location
+   */
     fetch('/api/dashboard', {
       method: 'GET',
       headers: new Headers({
@@ -72,6 +78,12 @@ class DashboardPage extends React.Component {
   setEventList(eventList) {
     this.setState({ eventList });
   }
+  /**
+ *
+ * @param {location} will be a set of coordinates
+ * @returns Sets the state coordinates, for each event list member
+ * allowing for the map to be updated
+ */
   setCoordinates(location) {
     this.setState({ location });
   }

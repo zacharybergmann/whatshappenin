@@ -89,12 +89,13 @@ class Map extends React.Component {
           longitude: json.results[0].geometry.location.lng,
         },
       });
+      if (this.props.geoCode) {
+        this.props.geoCode({
+          latitude: json.results[0].geometry.location.lat,
+          longitude: json.results[0].geometry.location.lng,
+        });
+      }
     });
-    if (this.props.geoCode) {
-      this.props.geoCode({ longitude: this.state.location.longitude,
-        latitude: this.state.location.latitude,
-      });
-    }
   }
   handleChange(event) {
     this.setState({ search: event.target.value });

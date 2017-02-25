@@ -26,7 +26,7 @@ const EventForm = props =>
       <TextField
         name="name"
         type="name"
-        hintText="Who are you?"
+        hintText="Whose event is this?"
         style={style}
       />
     </div>
@@ -35,22 +35,21 @@ const EventForm = props =>
         id="locationslot"
         name="location"
         type="location"
-        hintText="Where tha party at?!"
         value={`longitude: ${props.location.longitude} , latitude: ${props.location.latitude}`}
         style={style}
       />
     </div>
     <div>
       <TimePicker
-        name="time"
-        hintText="12hr Format"
+        name="eventTime"
+        hintText="What time does it start?"
         style={style}
       />
     </div>
     <div>
       <DatePicker
-        hintText="Portrait Dialog"
-        name="date"
+        hintText="What day?"
+        name="eventDate"
         style={style}
       />
     </div>
