@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EventList from './subcomponents/eventList.jsx';
 import EventForm from './subcomponents/EventForm.jsx';
-// import Map from './subcomponents/Map.jsx';
+import Map from './subcomponents/Map.jsx';
 import EventDetail from './subcomponents/EventDetail.jsx';
 
 class UserPage extends Component {
@@ -12,6 +12,7 @@ class UserPage extends Component {
       detailsBox: { name: 'name' },
     };
     this.setDetailsBox = this.setDetailsBox.bind(this);
+    this.geoCode = this.geoCode.bind(this);
   }
   componentWillMount() {
     /**
@@ -34,17 +35,16 @@ class UserPage extends Component {
   setDetailsBox(detailsBox) {
     this.setState({ detailsBox });
   }
+  geoCode(location) {
+    this.setState({ location });
+  }
   render() {
     return (
       <main className="container">
         <div id="userpage">
           <section>
             <EventForm location={this.state.location} />
-            <div id="floating-panel">
-              <input id="address" type="textbox" value="Sydney, NSW" />
-              <input id="submit" type="button" value="Geocode" />
-            </div>
-            <div id="map" />
+            <Map />
             <EventDetail event={this.state.detailsBox} />
           </section>
           <section id="userprofile" className="col-lg-4" />
