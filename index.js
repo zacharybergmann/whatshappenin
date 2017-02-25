@@ -35,7 +35,10 @@ app.get('/googlekey', (req, res) => {
   res.status(200).json(process.env.GOOGLE_MAP);
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4622b72e3ec54bb2d62f0fc6334707598377146c
 app.post('/makeevent', (req, res, next) => {
   console.log(req.body, 'event body');
   Event.createEvent(req.body);

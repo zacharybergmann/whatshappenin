@@ -39,6 +39,7 @@ const EventForm = () => {
       <div>
         <TextField
           name="time"
+          type="time"
           hintText="When I gotta be there?" style={style}
         />
       </div>
