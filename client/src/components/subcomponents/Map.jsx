@@ -29,8 +29,8 @@ class Map extends React.Component {
     console.log('onClick', e);
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       location: {
         latitude: null,
@@ -66,6 +66,11 @@ class Map extends React.Component {
       });
     });
     console.log(this.state.location, 'location');
+    if(this.props.geoCode) {
+      this.props.geoCode({longitude:this.state.location.longitude,
+        latitude:this.state.location.latitude,
+      });
+    }
   }
   handleChange(event) {
     this.setState({ search: event.target.value });

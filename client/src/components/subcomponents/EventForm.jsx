@@ -11,7 +11,6 @@ const style = {
 };
 
 const EventForm = props =>
-
     // username: String,
     // name: String,
     // eventTime: String,
@@ -37,7 +36,7 @@ const EventForm = props =>
         name="location"
         type="location"
         hintText="Where tha party at?!"
-        value={props.location}
+        value={`longitude: ${props.location.longitude} , latitude: ${props.location.latitude}`}
         style={style}
       />
     </div>
@@ -73,6 +72,4 @@ const EventForm = props =>
       <RaisedButton type="submit" label="make an Event" />
     </div>
   </form>;
-
-
 export default EventForm;
