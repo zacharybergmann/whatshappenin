@@ -55,7 +55,6 @@ app.get('/events', (req, res) => {
   }
 });
 
-
 app.get('/users', (req, res) => {
 
 })
