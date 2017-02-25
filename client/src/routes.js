@@ -46,13 +46,6 @@ const routes = {
       },
     },
     {
-      path: '/auth/google/callback',
-      onEnter: (nextState, replace) => {
-        replace('/');
-      }
-    },
-
-    {
       path: '*',
       component: NotFound,
     },
