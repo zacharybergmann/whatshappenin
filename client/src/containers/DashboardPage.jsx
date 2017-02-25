@@ -16,7 +16,7 @@ class DashboardPage extends React.Component {
     this.state = {
       secretData: '',
       eventList: [],
-      detailsBox: {name:'name'},
+      detailsBox: { name: 'name' },
     };
     /**
    *
@@ -25,7 +25,7 @@ class DashboardPage extends React.Component {
    */
     fetch('/events').then(events => events.json())
     .then((events) => {
-     console.log(events, 'eventbox');
+      console.log(events, 'eventbox');
       this.setState({ eventList: events });
       this.setState({ detailsBox: events[0] });
       // console.log(this.state,'state');

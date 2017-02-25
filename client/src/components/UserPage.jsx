@@ -10,12 +10,10 @@ class UserPage extends Component {
     this.state = {
       eventList: [],
       detailsBox: { name: 'name' },
-    }
-    this.geocodeAddress = this.geocodeAddress;
-    this.initMap = this.initMap;
+    };
+    this.setDetailsBox = this.setDetailsBox.bind(this);
   }
   componentWillMount() {
-    this.initMap();
     /**
    *
    * @param {events} a list of event objects from query
@@ -36,34 +34,6 @@ class UserPage extends Component {
   setDetailsBox(detailsBox) {
     this.setState({ detailsBox });
   }
-  initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 8,
-      center: {lat: -34.397, lng: 150.644}
-    });
-    var geocoder = new google.maps.Geocoder();
-
-    document.getElementById('submit').addEventListener('click', () => {
-      this.geocodeAddress(geocoder, map);
-    });
-  }
-
-  geocodeAddress( geocoder, resultsMap) {
-    var address = document.getElementById('address').value;
-    geocoder.geocode({'address': address}, function(results, status) {
-      if (status === 'OK') {
-        resultsMap.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-          map: resultsMap,
-          position: results[0].geometry.location
-        });
-        this.setState({location:results[0].geometry.location});
-        console.log(this.state.location);
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
-    });
-  }
   render() {
     return (
       <main className="container">
@@ -81,7 +51,7 @@ class UserPage extends Component {
           <sidebar className="col-lg-4">
             <EventList
               eventlist={this.state.eventList}
-              setDetailsBox={this.setDetailsBox.bind(this)}
+              setDetailsBox={this.setDetailsBox}
             />
           </sidebar>
         </div>
