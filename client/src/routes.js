@@ -15,20 +15,11 @@ const routes = {
     {
       path: '/',
       getComponent: (location, callback) => {
-        fetch('/verify')
-        .then((status) => {
-          console.log(status);
-          if (status !== 400 || Auth.isUserAuthenticated()) {
-            callback(null, DashboardPage);
-          } else {
-            callback(null, HomePage);
-          }
-        });
-        // if (Auth.isUserAuthenticated()) {
-        //   callback(null, DashboardPage);
-        // } else {
-        //   callback(null, HomePage);
-        // }
+        if (Auth.isUserAuthenticated()) {
+          callback(null, DashboardPage);
+        } else {
+          callback(null, HomePage);
+        }
       },
     },
 

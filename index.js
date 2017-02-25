@@ -14,11 +14,6 @@ app.use(express.static('./server/static/'));
 app.use(express.static('./client/dist/'));
 // tell the app to parse HTTP body messages
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({
-  secret: 'buttholes',
-  resave: false,
-  saveUninitialized: true,
-}));
 // pass the passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
@@ -26,11 +21,9 @@ app.use(passport.session());
 // load passport strategies
 const localSignupStrategy = require('./server/passport/local-signup');
 const localLoginStrategy = require('./server/passport/local-login');
-const googleLoginStrategy = require('./server/passport/google-login');
 
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
-passport.use('google', googleLoginStrategy);
 
 // pass the authorization checker middleware
 const authCheckMiddleware = require('./server/middleware/auth-check');
