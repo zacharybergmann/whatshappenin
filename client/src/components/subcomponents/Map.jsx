@@ -29,8 +29,10 @@ class Map extends React.Component {
     console.log('onClick', e);
   }
 
-  constructor(props) {
-    super(props);
+
+  constructor() {
+    super();
+
     this.state = {
       location: {
         latitude: null,
@@ -88,6 +90,24 @@ class Map extends React.Component {
         });
       }
     });
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log('submit', this.state.search)
+    fetch(`http://maps.googleapis.com/maps/api/geocode/json?address=${this.state.search}`)
+    .then(response => response.json())
+    .then((json) => {
+      this.setState({
+        location: {
+          latitude: json.results[0].geometry.location.lat,
+          longitude: json.results[0].geometry.location.lng,
+        },
+      });
+    });
+    console.log(this.state.location,'location');
+  }
+  handleChange(event) {
+    this.setState({ search: event.target.value });
   }
 
   handleChange(event) {

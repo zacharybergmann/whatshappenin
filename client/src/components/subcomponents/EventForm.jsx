@@ -15,8 +15,7 @@ const EventForm = ({
   processForm,
   handleTime,
   handleDate,
-  location }) => {
-  return (
+  location }) =>
     <form action="/" onSubmit={processForm}>
       <div>
         <TextField
@@ -113,6 +112,4 @@ const EventForm = ({
         <RaisedButton type="submit" label="make an Event" />
       </div>
     </form>
-  );
-};
 export default EventForm;
