@@ -10,6 +10,10 @@ class UserPage extends Component {
     this.state = {
       eventList: [],
       detailsBox: { name: 'name' },
+      location: {
+        longitude: 'longitude',
+        latitude: 'latitude',
+      }
     };
     this.setDetailsBox = this.setDetailsBox.bind(this);
     this.geoCode = this.geoCode.bind(this);
@@ -44,7 +48,7 @@ class UserPage extends Component {
         <div id="userpage">
           <section>
             <EventForm location={this.state.location} />
-            <Map />
+            <Map geoCode={this.geoCode} />
             <EventDetail event={this.state.detailsBox} />
           </section>
           <section id="userprofile" className="col-lg-4" />
