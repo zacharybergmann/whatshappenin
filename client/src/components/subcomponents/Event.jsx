@@ -1,5 +1,11 @@
 import React from 'react';
 
+/**
+*
+* @param {coordinate string} will be a set of coordinates
+* @returns parsed string, allows the map to be updated with new
+* coordinates when the event location is clicked;
+*/
 const parseCoordinates = function (coordString) {
   const coordinates = coordString.split(' ');
   const coordinateObj = {
@@ -37,7 +43,7 @@ const Event = (props) => {
 //
 // Event.propTypes = {
 //   event: React.Proptypes.String.isRequired,
-//   setDetailsBox: React.Proptypes.isRequired,
+//   setDetailsBox: React.Proptypes.Function.isRequired,
 // };
 
 export default Event;

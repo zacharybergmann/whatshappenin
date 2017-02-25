@@ -16,7 +16,6 @@ class UserPage extends Component {
       }
     };
     this.setDetailsBox = this.setDetailsBox.bind(this);
-    this.geoCode = this.geoCode.bind(this);
     this.setCoordinates = this.setCoordinates.bind(this);
   }
   componentWillMount() {
@@ -27,7 +26,6 @@ class UserPage extends Component {
    */
     fetch('/events').then(events => events.json())
     .then((events) => {
-     console.log(events, 'eventbox');
       this.setState({ eventList: events });
       this.setState({ detailsBox: events[0] });
     }).catch(err => console.log(err));
@@ -50,16 +48,14 @@ class UserPage extends Component {
   setCoordinates(location) {
     this.setState({ location });
   }
-  geoCode(location) {
-    this.setState({ location });
-  }
+
   render() {
     return (
       <main className="container">
         <div id="userpage">
           <section>
             <EventForm location={this.state.location} />
-            <Map coordinates={this.state.location} geoCode={this.geoCode} />
+            <Map coordinates={this.state.location} geoCode={this.setCoordinates} />
             <EventDetail event={this.state.detailsBox} />
           </section>
           <section id="userprofile" className="col-lg-4" />
