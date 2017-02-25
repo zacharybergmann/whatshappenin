@@ -17,6 +17,7 @@ class UserPage extends Component {
     };
     this.setDetailsBox = this.setDetailsBox.bind(this);
     this.setCoordinates = this.setCoordinates.bind(this);
+    this.geoCode = this.geoCode.bind(this);
   }
   componentWillMount() {
     /**
@@ -50,6 +51,9 @@ class UserPage extends Component {
   }
 
 
+  geoCode(location) {
+    this.setState({ location });
+  }
   render() {
     return (
       <main className="container">
