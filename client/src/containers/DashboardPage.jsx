@@ -31,6 +31,10 @@ class DashboardPage extends React.Component {
         detailsBox: events[0]
       });
     }).catch(err => console.log(err));
+<<<<<<< HEAD
+=======
+
+>>>>>>> (feature) Add component update controllers to map, allows event clicks to position map to even location
     this.setCoordinates = this.setCoordinates.bind(this);
     this.setDetailsBox = this.setDetailsBox.bind(this);
     this.setEventList = this.setEventList.bind(this);
@@ -73,12 +77,18 @@ class DashboardPage extends React.Component {
   setEventList(eventList) {
     this.setState({ eventList });
   }
+<<<<<<< HEAD
 
 
   setCoordinates(location) {
     this.setState({ location });
   }
 
+=======
+  setCoordinates(location) {
+    this.setState({ location });
+  }
+>>>>>>> (feature) Add component update controllers to map, allows event clicks to position map to even location
   /**
    * Render the component.
    */

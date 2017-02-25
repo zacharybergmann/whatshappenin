@@ -4,7 +4,7 @@ import EventDetail from './subcomponents/EventDetail.jsx';
 import Map from './subcomponents/Map.jsx';
 import EventList from './subcomponents/eventList.jsx';
 
-const Dashboard = ({ data, setEveList, setDetBox, setCoordinates, coordinates }) => (
+const Dashboard = ({ data, setEveList, setDetBox , setCoordinates , coordinates}) => (
   <Card className="container">
     <CardTitle
       title="Dashboard"

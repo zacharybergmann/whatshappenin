@@ -11,12 +11,13 @@ class UserPage extends Component {
       eventList: [],
       detailsBox: { name: 'name' },
       location: {
-        longitude: 'longitude',
-        latitude: 'latitude',
+        longitude: null,
+        latitude: null,
       }
     };
     this.setDetailsBox = this.setDetailsBox.bind(this);
     this.geoCode = this.geoCode.bind(this);
+    this.setCoordinates = this.setCoordinates.bind(this);
   }
   componentWillMount() {
     /**
@@ -39,6 +40,16 @@ class UserPage extends Component {
   setDetailsBox(detailsBox) {
     this.setState({ detailsBox });
   }
+
+  /**
+ *
+ * @param {location} will be a set of coordinates
+ * @returns Sets the state coordinates, and loads the eventform
+ * with the given location
+ */
+  setCoordinates(location) {
+    this.setState({ location });
+  }
   geoCode(location) {
     this.setState({ location });
   }
@@ -48,12 +59,13 @@ class UserPage extends Component {
         <div id="userpage">
           <section>
             <EventForm location={this.state.location} />
-            <Map geoCode={this.geoCode} />
+            <Map coordinates={this.state.location} geoCode={this.geoCode} />
             <EventDetail event={this.state.detailsBox} />
           </section>
           <section id="userprofile" className="col-lg-4" />
           <sidebar className="col-lg-4">
             <EventList
+              setCoordinates={this.setCoordinates}
               eventlist={this.state.eventList}
               setDetailsBox={this.setDetailsBox}
             />

@@ -46,25 +46,29 @@ class Map extends React.Component {
     navigator.geolocation.getCurrentPosition((location) => {
       this.setState({ location: location.coords });
     });
-    // fetch('/googlekey')
-    // .then(response => response.json())
-    // .then((key) => {
-    //   this.setState({ googleKey: key });
-    // });
   }
   componentWillReceiveProps(nextprops) {
+    console.log(this.state,'prior to change')
     if (nextprops.coordinates) {
       const latitude = +nextprops.coordinates.latitude;
       const longitude = +nextprops.coordinates.longitude;
       this.setState({
         location: {
-          latitude,
-          longitude,
+          latitude: latitude,
+          longitude: longitude,
         },
       });
     }
+    console.log(this.state);
   }
-
+  /**
+ *
+ * @param {event} form submission event
+ * @param this, state, Takes the search position from state object
+ *
+ * @returns Sets the location of the map for a query, and sets the event form
+ *          location parameter to the geolocation's coordinates.
+ */
   handleSubmit(event) {
     event.preventDefault();
 
