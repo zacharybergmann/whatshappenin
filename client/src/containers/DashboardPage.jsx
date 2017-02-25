@@ -30,7 +30,9 @@ class DashboardPage extends React.Component {
         eventList: events,
         detailsBox: events[0]
       });
-      // this.setState({ detailsBox: events[0] });
+     console.log(events, 'eventbox');
+      this.setState({ eventList: events });
+      this.setState({ detailsBox: events[0] });
     }).catch(err => console.log(err));
 
     this.setCoordinates = this.setCoordinates.bind(this);
@@ -68,13 +70,18 @@ class DashboardPage extends React.Component {
   }
 
   /**
- * Returns the sum of a and b
+ *
  * @param {events} a list of event objects from query
  * @returns Sets the state eventlist to the array of events
  */
   setEventList(eventList) {
     this.setState({ eventList });
   }
+  /**
+ *
+ * @param {location} a location to center the map component on click
+ * @returns Sets the state eventlist to the array of events
+ */
 
 
   setCoordinates(location) {

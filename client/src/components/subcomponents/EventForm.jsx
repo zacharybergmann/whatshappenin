@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import TimePicker from 'material-ui/TimePicker';
 import DatePicker from 'material-ui/DatePicker';
+// import { Gmaps, Marker, geocoder, InfoWindow } from 'react-gmaps';
 
 const style = {
   marginLeft: 20,
@@ -14,8 +15,7 @@ const EventForm = ({
   processForm,
   handleTime,
   handleDate,
-  location }) => {
-  return (
+  location }) =>
     <form action="/" onSubmit={processForm}>
       <div>
         <TextField
@@ -111,8 +111,5 @@ const EventForm = ({
       <div>
         <RaisedButton type="submit" label="make an Event" />
       </div>
-    </form>
-  );
-};
-
+    </form>;
 export default EventForm;
