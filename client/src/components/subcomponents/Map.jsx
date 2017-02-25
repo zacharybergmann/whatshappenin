@@ -103,7 +103,7 @@ class Map extends React.Component {
         },
       });
     });
-    console.log(this.state.location,'location');
+    console.log(this.state.location, 'location');
   }
   handleChange(event) {
     this.setState({ search: event.target.value });

@@ -30,9 +30,7 @@ class DashboardPage extends React.Component {
         eventList: events,
         detailsBox: events[0]
       });
-
     }).catch(err => console.log(err));
-
     this.setCoordinates = this.setCoordinates.bind(this);
     this.setDetailsBox = this.setDetailsBox.bind(this);
     this.setEventList = this.setEventList.bind(this);

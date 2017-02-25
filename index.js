@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const Event = require('./server/controllers/events');
-
+const Path = require('path');
 require('dotenv').config();
 // connect to the database and load models
 require('./server/models').connect(process.env.EPMONGO || process.env.MONGO_KEY);
@@ -38,11 +38,12 @@ app.use('/api', apiRoutes);
 app.get('/googlekey', (req, res) => {
   res.status(200).json(process.env.GOOGLE_MAP);
 });
-// app.post('/makeevent', (req, res, next) => {
-//   console.log(req.body, 'event body');
-//   Event.createEvent(req.body);
-//   res.send('event made');
-// });
+
+app.post('/makeevent', (req, res) => {
+  console.log(req.body, 'event body');
+  Event.createEvent(req.body);
+  res.send('event made');
+});
 
 /**
  * Route to get events for both user, and events page
@@ -58,12 +59,10 @@ app.get('/events', (req, res) => {
   }
 });
 
-app.get('/users', (req, res) => {
-
-});
+app.get('/users');
 
 app.get('*', (req, res) => {
-  res.sendFile(`${__dirname}/server/static/index.html`);
+  res.sendFile(Path.resolve(__dirname, './server/static/index.html'));
 });
 // start the server
 app.listen(process.env.PORT || 3000, () => {
