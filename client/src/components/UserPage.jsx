@@ -11,8 +11,8 @@ class UserPage extends Component {
       eventList: [],
       detailsBox: { name: 'name' },
       location: {
-        longitude: null,
-        latitude: null,
+        longitude: 'longitude',
+        latitude: 'latitude',
       }
     };
     this.setDetailsBox = this.setDetailsBox.bind(this);

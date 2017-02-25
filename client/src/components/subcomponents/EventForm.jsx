@@ -111,5 +111,6 @@ const EventForm = ({
       <div>
         <RaisedButton type="submit" label="make an Event" />
       </div>
-    </form>
+    </form>;
+
 export default EventForm;
