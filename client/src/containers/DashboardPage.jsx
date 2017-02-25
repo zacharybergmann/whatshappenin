@@ -15,9 +15,21 @@ class DashboardPage extends React.Component {
 
     this.state = {
       secretData: '',
-      eventList: ['event1', 'event2', 'event3', 'event4', 'event5'],
-      detailsBox: null,
+      eventList: [],
+      detailsBox: {name:'name'},
     };
+    /**
+   *
+   * @param {events} a list of event objects from query
+   * @returns Sets the state eventlist to the array of events
+   */
+    fetch('/events').then(events => events.json())
+    .then((events) => {
+     console.log(events, 'eventbox');
+      this.setState({ eventList: events });
+      this.setState({ detailsBox: events[0] });
+      console.log(this.state,'state');
+    }).catch(err => console.log(err));
 
     this.setDetailsBox = this.setDetailsBox.bind(this);
     this.setEventList = this.setEventList.bind(this);
@@ -41,7 +53,6 @@ class DashboardPage extends React.Component {
     })
     .catch(err => `Whoops: ${err}`);
   }
-
   /**
    * Returns the sum of a and b
    * @param {event} the event object a user clicks on
