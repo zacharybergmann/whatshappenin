@@ -76,10 +76,6 @@ function validateLoginForm(payload) {
   };
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> (feature) remove all instances of google login
 router.post('/signup', (req, res, next) => {
   const validationResult = validateSignupForm(req.body);
   if (!validationResult.success) {
@@ -154,8 +150,4 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> (feature) remove all instances of google login
 module.exports = router;
