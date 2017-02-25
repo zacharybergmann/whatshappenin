@@ -31,6 +31,7 @@ class DashboardPage extends React.Component {
       // console.log(this.state,'state');
     }).catch(err => console.log(err));
 
+    this.setCoordinates = this.setCoordinates.bind(this);
     this.setDetailsBox = this.setDetailsBox.bind(this);
     this.setEventList = this.setEventList.bind(this);
   }
@@ -71,11 +72,16 @@ class DashboardPage extends React.Component {
   setEventList(eventList) {
     this.setState({ eventList });
   }
+  setCoordinates(location) {
+    this.setState({ location });
+  }
   /**
    * Render the component.
    */
   render() {
     return (<Dashboard
+      coordinates={this.state.location}
+      setCoordinates={this.setCoordinates}
       setDetBox={this.setDetailsBox}
       setEveList={this.setEventList}
       data={this.state}

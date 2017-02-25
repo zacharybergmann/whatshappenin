@@ -4,7 +4,7 @@ import EventDetail from './subcomponents/EventDetail.jsx';
 import Map from './subcomponents/Map.jsx';
 import EventList from './subcomponents/eventList.jsx';
 
-const Dashboard = ({ data, setEveList, setDetBox }) => (
+const Dashboard = ({ data, setEveList, setDetBox , setCoordinates , coordinates}) => (
   <Card className="container">
     <CardTitle
       title="Dashboard"
@@ -14,7 +14,7 @@ const Dashboard = ({ data, setEveList, setDetBox }) => (
       <section id="eventpagebody">
         <section id="map" className="col-lg-4">
           <section >
-            <Map />
+            <Map coordinates={coordinates} />
             <article id="EventDetail">
               <EventDetail event={data.detailsBox} />
             </article>
@@ -22,6 +22,7 @@ const Dashboard = ({ data, setEveList, setDetBox }) => (
         </section>
         <sidebar className="col-lg-4">
           <EventList
+            setCoordinates={setCoordinates}
             eventlist={data.eventList}
             setDetailsBox={setDetBox}
           />
