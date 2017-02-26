@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import EventList from './subcomponents/eventList.jsx';
 import EventForm from './subcomponents/EventForm.jsx';
-
 import EventDetail from './subcomponents/EventDetail.jsx';
 
 class UserPage extends Component {
@@ -10,7 +9,9 @@ class UserPage extends Component {
     this.state = {
       eventList: [],
       map: null,
-      detailsBox: { name: 'name' },
+      detailsBox: {
+        name,
+      },
     };
   }
   componentWillMount() {
@@ -21,7 +22,6 @@ class UserPage extends Component {
    */
     fetch('/events').then(events => events.json())
     .then((events) => {
-     console.log(events, 'eventbox');
       this.setState({ eventList: events });
       this.setState({ detailsBox: events[0] });
       console.log(this.state,'state');
@@ -44,8 +44,8 @@ class UserPage extends Component {
         <div id="userpage">
           <section>
             <EventForm />
-            <EventDetail event={this.state.detailsBox} />
           </section>
+          <EventDetail event={this.state.detailsBox} />
           <section id="userprofile" className="col-lg-4" />
           <sidebar className="col-lg-4">
             <EventList
