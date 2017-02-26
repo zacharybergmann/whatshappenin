@@ -17,6 +17,11 @@ function validateSignupForm(payload) {
   let isFormValid = true;
   let message = '';
 
+  if (!payload || typeof payload.username !== 'string' || payload.username.trim().length === 0) {
+    isFormValid = false;
+    errors.username = 'Please provide a username.';
+  }
+
   if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
     isFormValid = false;
     errors.email = 'Please provide a correct email address.';
@@ -30,6 +35,11 @@ function validateSignupForm(payload) {
   if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) {
     isFormValid = false;
     errors.name = 'Please provide your name.';
+  }
+
+  if (!payload || typeof payload.name !== 'string' || payload.location.trim().length === 0) {
+    isFormValid = false;
+    errors.location = 'Please provide your location ("City, ST").';
   }
 
   if (!isFormValid) {
