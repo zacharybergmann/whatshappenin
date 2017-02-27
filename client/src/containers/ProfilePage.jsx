@@ -1,7 +1,11 @@
 import React from 'react';
 import { CardText } from 'material-ui/Card';
 import Auth from '../modules/Auth';
-import UserPage from '../components/UserPage.jsx';
+import EventList from '../components/subcomponents/eventList.jsx';
+import EventForm from '../components/subcomponents/EventForm.jsx';
+import EventDetail from '../components/subcomponents/EventDetail.jsx';
+import Map from '../components/subcomponents/Map.jsx';
+import Event from '../components/subcomponents/Event.jsx';
 
 
 /* global localStorage, XMLHttpRequest */
@@ -20,7 +24,7 @@ class ProfilePage extends React.Component {
       },
       eventDetails: {
         username: '',
-        name: '',
+        title: '',
         eventTime: '',
         eventDate: '',
         tags: '',
@@ -28,6 +32,10 @@ class ProfilePage extends React.Component {
         picLink: '',
         busLink: '',
         description: '',
+      },
+      location: {
+        longitude: null,
+        latitude: null,
       },
       successMessage: null,
     };
@@ -37,6 +45,7 @@ class ProfilePage extends React.Component {
     this.processEventForm = this.processEventForm.bind(this);
     this.handleTime = this.handleTime.bind(this);
     this.handleDate = this.handleDate.bind(this);
+    this.setCoordinates = this.setCoordinates.bind(this);
   }
 
   componentWillMount() {
@@ -49,7 +58,6 @@ class ProfilePage extends React.Component {
     .then((events) => {
       this.setState({ eventList: events });
       this.setState({ detailsBox: events[0] });
-      console.log(this.state,'state');
     }).catch(err => console.log(err));
   }
   /**
@@ -61,13 +69,15 @@ class ProfilePage extends React.Component {
     this.setState({ detailsBox });
   }
 
+  setCoordinates(location) {
+    this.setState({ location });
+  }
   /**
    * Change the eventDetails object.
    *
    * @param {object} event - the JavaScript event object
    */
   changeEvent(event) {
-    console.log(event);
     const field = event.target.name;
     const ev = this.state.eventDetails;
     ev[field] = event.target.value;
@@ -113,16 +123,21 @@ class ProfilePage extends React.Component {
   processEventForm(event) {
     event.preventDefault();
     const eveDet = this.state.eventDetails;
+    eveDet.location = {
+      longitude: this.state.location.longitude,
+      latitude: this.state.location.latitude,
+    };
     // create a string for an HTTP body message
-    const name = encodeURIComponent(eveDet.name);
-    const eventTime = encodeURIComponent(eveDet.eventTime);
-    const eventDate = encodeURIComponent(eveDet.eventDate);
+    const title = encodeURIComponent(eveDet.title);
+    const eventTime = eveDet.eventTime;
+    const eventDate = eveDet.eventDate;
     const tags = encodeURIComponent(eveDet.tags);
     const businessName = encodeURIComponent(eveDet.businessName);
     const picLink = encodeURIComponent(eveDet.picLink);
     const busLink = encodeURIComponent(eveDet.busLink);
     const description = encodeURIComponent(eveDet.description);
-    const formData = `name=${name}&eventTime=${eventTime}&eventDate=${eventDate}&tags=${tags}&businessName=${businessName}&picLink=${picLink}&busLink=${busLink}&description=${description}`;
+    const location = encodeURIComponent(`longitude: ${eveDet.location.longitude} , latitude: ${eveDet.location.latitude}`)
+    const formData = `title=${title}&eventTime=${eventTime}&eventDate=${eventDate}&tags=${tags}&businessName=${businessName}&picLink=${picLink}&busLink=${busLink}&description=${description}&location=${location}`;
     fetch('/api/makeevent', {
       method: 'POST',
       headers: new Headers({
@@ -141,20 +156,32 @@ class ProfilePage extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.successMessage &&
-          <CardText className="success-message">{this.state.successMessage}</CardText>}
-        <UserPage
-          eventList={this.state.eventList}
-          detBox={this.state.detailsBox}
-          setDetBox={this.setDetailsBox}
-          eventDetails={this.state.eventDetails}
-          eveChange={this.changeEvent}
-          processForm={this.processEventForm}
-          handleTime={this.handleTime}
-          handleDate={this.handleDate}
-        />
-      </div>
+      <main className="container">
+        <div id="userpage">
+          <section>
+            {this.state.successMessage &&
+              <CardText className="success-message">{this.state.successMessage}</CardText>}
+            <EventForm
+              eventDetails={this.state.eventDetails}
+              eveChange={this.changeEvent}
+              processForm={this.processEventForm}
+              handleTime={this.handleTime}
+              handleDate={this.handleDate}
+              location={this.state.location}
+            />
+            <Map coordinates={this.state.location} geoCode={this.setCoordinates} />
+            <EventDetail event={this.state.detailsBox} />
+          </section>
+          <section id="userprofile" className="col-lg-4" />
+          <sidebar className="col-lg-4">
+            <EventList
+              setCoordinates={this.setCoordinates}
+              eventlist={this.state.eventList}
+              setDetailsBox={this.setDetailsBox}
+            />
+          </sidebar>
+        </div>
+      </main>
     );
   }
 

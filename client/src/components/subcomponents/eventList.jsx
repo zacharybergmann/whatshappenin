@@ -1,10 +1,10 @@
 import React from 'react';
 import Event from './Event.jsx';
 
-const EventList = ({ eventlist, setDetailsBox }) =>
+const EventList = ({ eventlist, setDetailsBox, setCoordinates }) =>
   <div>
     {eventlist.map(event =>
-      <Event key={event.id} setDetailsBox={setDetailsBox} event={event} />,
+      <Event key={event.id} setDetailsBox={setDetailsBox} event={event} setCoordinates={setCoordinates} />,
     )}
   </div>;
 
