@@ -67,6 +67,7 @@ const SignUpForm = ({
           type="location"
           name="location"
           onChange={onChange}
+          errorText={errors.location}
           value={user.location}
         />
       </div>

@@ -46,12 +46,8 @@ class Map extends React.Component {
     navigator.geolocation.getCurrentPosition((location) => {
       this.setState({ location: location.coords });
     });
-    fetch('/googlekey')
-    .then(response => response.json())
-    .then((key) => {
-      this.setState({ googleKey: key });
-    });
   }
+
   componentWillReceiveProps(nextprops) {
     console.log(this.state,'prior to change')
     if (nextprops.coordinates) {
@@ -66,10 +62,7 @@ class Map extends React.Component {
     }
     console.log(this.state);
   }
-  // shouldComponentUpdate(nextprops, nextstate) {
-  //   return this.state.longitude === nextstate.longitude;
-  // }
-  /**
+/**
  *
  * @param {event} form submission event
  * @param this, state, Takes the search position from state object

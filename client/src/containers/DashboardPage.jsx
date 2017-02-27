@@ -1,22 +1,16 @@
 import React from 'react';
-// import fetch from 'react-fetch';
 import Auth from '../modules/Auth';
 import Dashboard from '../components/Dashboard.jsx';
 
-/* global localStorage, XMLHttpRequest */
-
 class DashboardPage extends React.Component {
-
-  /**
-   * Class constructor.
-   */
   constructor(props) {
     super(props);
-
     this.state = {
       secretData: '',
       eventList: [],
-      detailsBox: { name: 'name' },
+      detailsBox: {
+        name,
+      },
     };
     /**
    *
@@ -25,10 +19,13 @@ class DashboardPage extends React.Component {
    */
     fetch('/events').then(events => events.json())
     .then((events) => {
-      console.log(events, 'eventbox');
+      this.setState({
+        eventList: events,
+        detailsBox: events[0]
+      });
+     console.log(events, 'eventbox');
       this.setState({ eventList: events });
       this.setState({ detailsBox: events[0] });
-      // console.log(this.state,'state');
     }).catch(err => console.log(err));
 
     this.setCoordinates = this.setCoordinates.bind(this);
@@ -60,25 +57,26 @@ class DashboardPage extends React.Component {
     })
     .catch(err => `Whoops: ${err}`);
   }
+
+
   /**
    * Returns the sum of a and b
    * @param {event} the event object a user clicks on
    * @return Sets the state detailbox to the clicked event
    */
   setDetailsBox(detailsBox) {
-    // console.warn(detailsBox, 'event');
     this.setState({ detailsBox });
   }
 
-  /**
- * Returns the sum of a and b
+/**
+ *
  * @param {events} a list of event objects from query
  * @returns Sets the state eventlist to the array of events
  */
   setEventList(eventList) {
     this.setState({ eventList });
   }
-  /**
+/**
  *
  * @param {location} will be a set of coordinates
  * @returns Sets the state coordinates, for each event list member
@@ -87,9 +85,7 @@ class DashboardPage extends React.Component {
   setCoordinates(location) {
     this.setState({ location });
   }
-  /**
-   * Render the component.
-   */
+
   render() {
     return (<Dashboard
       coordinates={this.state.location}

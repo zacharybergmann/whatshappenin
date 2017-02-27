@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Events = new mongoose.Schema({
   username: String,
-  name: String,
+  title: String,
   eventTime: String,
   eventDate: String,
   location: String,
@@ -12,6 +12,7 @@ const Events = new mongoose.Schema({
   picLink: String, // Link to hosted picture
   busLink: String, // url to business' homepage
   description: String,
+  attendees: {},
 });
 
 const ev = mongoose.model('Events', Events);

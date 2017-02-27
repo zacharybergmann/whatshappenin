@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const Event = require('./server/controllers/events');
 const Path = require('path');
+const User = require('./server/models/user.js');
 require('dotenv').config();
 // connect to the database and load models
 require('./server/models').connect(process.env.EPMONGO || process.env.MONGO_KEY);
@@ -15,6 +16,7 @@ app.use(express.static('./client/dist/'));
 app.use(bodyParser.urlencoded({ extended: false }));
 // pass the passport middleware
 app.use(passport.initialize());
+app.use(passport.session());
 
 // load passport strategies
 const localSignupStrategy = require('./server/passport/local-signup');
@@ -40,8 +42,9 @@ app.get('/googlekey', (req, res) => {
 
 app.post('/makeevent', (req, res) => {
   console.log(req.body, 'event body');
+  req.body.attendees = {};
   Event.createEvent(req.body);
-  res.send('event made');
+  res.redirect('/userpage')
 });
 
 /**
@@ -62,7 +65,11 @@ app.get('/users');
 
 app.get('*', (req, res) => {
   res.sendFile(Path.resolve(__dirname, './server/static/index.html'));
+app.post('/addAttendee', (req, res) => {
+  console.log(req.params);
+  Event.findOneandUpdate({ title: req.params.title }, { attendees: { [req.param.username]: true } });
 });
+
 // start the server
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server is running on http://localhost:3000 or http://127.0.0.1:3000');

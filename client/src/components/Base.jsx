@@ -16,7 +16,7 @@ const Base = ({ children }) => (
             activeClassName="active"
             to="/"
           ><strong>Events</strong></IndexLink>&nbsp;
-          <IndexLink activeClassName="active" to="/userpage">Profile</IndexLink>&nbsp;
+          <Link to="/profile">Profile</Link>&nbsp;
           <Link to="/logout">Log out</Link>
         </div>
       ) : (

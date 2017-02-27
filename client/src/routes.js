@@ -4,8 +4,8 @@ import DashboardPage from './containers/DashboardPage.jsx';
 import LoginPage from './containers/LoginPage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
 import NotFound from './components/notFound.jsx';
+import ProfilePage from './containers/ProfilePage.jsx';
 import Auth from './modules/Auth';
-import UserPage from './components/UserPage.jsx'
 
 const routes = {
   // base component (wrapper for the whole application).
@@ -32,10 +32,12 @@ const routes = {
       path: '/signup',
       component: SignUpPage,
     },
+
     {
-      path: '/userpage',
-      component: UserPage,
+      path: '/profile',
+      component: ProfilePage,
     },
+
     {
       path: '/logout',
       onEnter: (nextState, replace) => {
