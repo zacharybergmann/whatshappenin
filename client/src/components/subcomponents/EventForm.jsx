@@ -8,27 +8,33 @@ const style = {
   marginLeft: 20,
 };
 
-const EventForm = ({ eventDetails, eveChange, processForm, handleTime, handleDate }) => {
+const EventForm = ({
+  eventDetails,
+  eveChange,
+  processForm,
+  handleTime,
+  handleDate,
+  location }) => {
   return (
-
     <form action="/" onSubmit={processForm}>
       <div>
         <TextField
-          name="name"
-          type="name"
+          name="title"
+          type="title"
           hintText="What's the party called?"
           style={style}
-          value={eventDetails.name}
+          value={eventDetails.title}
           onChange={eveChange}
         />
       </div>
       <div>
         <TextField
+          id="locationslot"
           name="location"
           type="location"
           hintText="Where tha party at?!"
           style={style}
-          value={eventDetails.location}
+          value={`longitude: ${location.longitude} , latitude: ${location.latitude}`}
           onChange={eveChange}
         />
       </div>

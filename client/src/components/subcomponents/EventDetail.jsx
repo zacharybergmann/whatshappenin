@@ -2,7 +2,7 @@ import React from 'react';
 
 const EventDetail = props =>
   <article className="eventdetail">
-    <img alt="" id="image" src="http://www.ufunk.net/wp-content/uploads/2013/03/thumbs-and-ammo-9.jpg" className="col-sm-2" />
+    <img alt="" id="image" className="col-sm-2" />
     <section className="eventdescription">
       <div className="col-md-3">
         <a>{props.event.name}</a>
