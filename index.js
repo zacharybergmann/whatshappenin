@@ -41,10 +41,8 @@ app.get('/googlekey', (req, res) => {
 });
 
 app.post('/makeevent', (req, res) => {
-  console.log(req.body, 'event body');
-  req.body.attendees = {};
+  // req.body.attendees = {};
   Event.createEvent(req.body);
-  res.redirect('/userpage')
 });
 
 /**
@@ -61,14 +59,15 @@ app.get('/events', (req, res) => {
   }
 });
 
-app.get('/users');
 
 app.get('*', (req, res) => {
   res.sendFile(Path.resolve(__dirname, './server/static/index.html'));
-app.post('/addAttendee', (req, res) => {
-  console.log(req.params);
-  Event.findOneandUpdate({ title: req.params.title }, { attendees: { [req.param.username]: true } });
 });
+
+// app.post('/addAttendee', (req, res) => {
+//   console.log(req.params);
+//   Event.findOneandUpdate({ title: req.params.title }, { attendees: { [req.param.username]: true } });
+// });
 
 // start the server
 app.listen(process.env.PORT || 3000, () => {
