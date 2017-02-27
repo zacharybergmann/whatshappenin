@@ -12,6 +12,7 @@ const Events = new mongoose.Schema({
   picLink: String, // Link to hosted picture
   busLink: String, // url to business' homepage
   description: String,
+  attendees: {},
 });
 
 const ev = mongoose.model('Events', Events);

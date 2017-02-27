@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const Event = require('./server/controllers/events');
 const Path = require('path');
+const User = require('./server/models/user.js');
+
 require('dotenv').config();
 // connect to the database and load models
 require('./server/models').connect(process.env.EPMONGO || process.env.MONGO_KEY);
@@ -38,6 +40,17 @@ app.use('/api', apiRoutes);
 app.get('/googlekey', (req, res) => {
   res.status(200).json(process.env.GOOGLE_MAP);
 });
+<<<<<<< HEAD
+=======
+
+app.post('/makeevent', (req, res) => {
+  console.log(req.body, 'event body');
+  req.body.attendees = {};
+  Event.createEvent(req.body);
+  res.redirect('/userpage')
+});
+
+>>>>>>> (feature) Add's starter for username storage
 /**
  * Route to get events for both user, and events page
  * @param req.body, if it contains the username, then get
@@ -52,7 +65,13 @@ app.get('/events', (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 app.get('/users');
+=======
+app.post('/addAttendee', (req, res) => {
+  console.log(req.params);
+  Event.findOneandUpdate({ title: req.params.title }, { attendees: { [req.param.username]: true } });
+>>>>>>> (feature) Add's starter for username storage
 });
 
 app.get('*', (req, res) => {

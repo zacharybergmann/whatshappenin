@@ -12,7 +12,8 @@ const EventDetail = props =>
         <div>{props.event.tags}</div>
       </div>
     </section>
-  </article>;
+  </article>
+
 
 // EventDetail.propTypes = {
 //   event: React.Proptypes.Object.isRequired,

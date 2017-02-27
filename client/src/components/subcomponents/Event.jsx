@@ -28,14 +28,27 @@ const Event = (props) => {
     const coordinates = parseCoordinates(props.event.location);
     props.setCoordinates(coordinates);
   }
+  function addAttendee() {
+    fetch('/addAttendee', { method: 'POST',
+      params: { username: localStorage.getItem('email'), event:props.event.title }
+    }).then((attended) => {
+      if (attended) {
+        props.event.attendees++;
+      }
+    });
+  }
   return (
     <article className="eventdetail">
       <div className="eventlistbox">
         <a onClick={setDetailsBox}>{props.event.title}</a>
-        <div>eventTime: {props.event.time}.</div>
+        <div>EventTime: {props.event.time}.</div>
         <a onClick={setCoordinates}>location:{props.event.location}</a>
         <p>{props.event.description}</p>
         <div>{props.event.tags}</div>
+        <span>
+          <a onClick={addAttendee}>I'm Going!</a>
+          <div>attendees: {props.event.attendees}</div>
+        </span>
       </div>
     </article>
   );
