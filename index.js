@@ -42,6 +42,7 @@ app.get('/googlekey', (req, res) => {
 });
 
 app.post('/makeevent', (req, res) => {
+<<<<<<< HEAD
   console.log(req.body, 'event body');
   Event.createEvent(req.body);
   res.send('event made');
@@ -51,7 +52,6 @@ app.post('/makeevent', (req, res) => {
   console.log(req.body, 'event body');
   req.body.attendees = {};
   Event.createEvent(req.body);
-  res.redirect('/userpage')
 });
 
 /**

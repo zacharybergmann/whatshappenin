@@ -43,10 +43,6 @@ const Event = (props) => {
         <a onClick={setCoordinates}>location:{props.event.location}</a>
         <p>{props.event.description}</p>
         <div>{props.event.tags}</div>
-        <span>
-          <a onClick={addAttendee}>I'm Going!</a>
-          <div>attendees: {props.event.attendees}</div>
-        </span>
       </div>
     </article>
   );
