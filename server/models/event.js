@@ -4,6 +4,7 @@ const Events = new mongoose.Schema({
   username: String,
   name: String,
   eventTime: String,
+  eventDate: String,
   location: String,
   createdAt: String, // In the format of "2/16/2017, 8:28:03 PM"
   tags: String,

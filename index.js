@@ -38,11 +38,11 @@ app.use('/api', apiRoutes);
 app.get('/googlekey', (req, res) => {
   res.status(200).json(process.env.GOOGLE_MAP);
 });
-app.post('/makeevent', (req, res, next) => {
-  console.log(req.body, 'event body');
-  Event.createEvent(req.body);
-  res.send('event made');
-});
+// app.post('/makeevent', (req, res, next) => {
+//   console.log(req.body, 'event body');
+//   Event.createEvent(req.body);
+//   res.send('event made');
+// });
 
 /**
  * Route to get events for both user, and events page

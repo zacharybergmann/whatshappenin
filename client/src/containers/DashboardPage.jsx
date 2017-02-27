@@ -1,5 +1,4 @@
 import React from 'react';
-// import fetch from 'react-fetch';
 import Auth from '../modules/Auth';
 import Dashboard from '../components/Dashboard.jsx';
 
@@ -16,7 +15,9 @@ class DashboardPage extends React.Component {
     this.state = {
       secretData: '',
       eventList: [],
-      detailsBox: {name:'name'},
+      detailsBox: {
+        name,
+      },
     };
     /**
    *
@@ -25,10 +26,11 @@ class DashboardPage extends React.Component {
    */
     fetch('/events').then(events => events.json())
     .then((events) => {
-     console.log(events, 'eventbox');
-      this.setState({ eventList: events });
-      this.setState({ detailsBox: events[0] });
-      console.log(this.state,'state');
+      this.setState({
+        eventList: events,
+        detailsBox: events[0]
+      });
+      // this.setState({ detailsBox: events[0] });
     }).catch(err => console.log(err));
 
     this.setDetailsBox = this.setDetailsBox.bind(this);
@@ -53,13 +55,14 @@ class DashboardPage extends React.Component {
     })
     .catch(err => `Whoops: ${err}`);
   }
+
+
   /**
    * Returns the sum of a and b
    * @param {event} the event object a user clicks on
    * @return Sets the state detailbox to the clicked event
    */
   setDetailsBox(detailsBox) {
-    console.warn(detailsBox, 'event');
     this.setState({ detailsBox });
   }
 
@@ -71,6 +74,7 @@ class DashboardPage extends React.Component {
   setEventList(eventList) {
     this.setState({ eventList });
   }
+
   /**
    * Render the component.
    */
