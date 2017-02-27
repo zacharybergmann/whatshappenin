@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const Event = require('./server/controllers/events');
 const Path = require('path');
+const User = require('./server/models/user.js');
+
 require('dotenv').config();
 // connect to the database and load models
 require('./server/models').connect(process.env.EPMONGO || process.env.MONGO_KEY);
@@ -44,6 +46,14 @@ app.post('/makeevent', (req, res) => {
   Event.createEvent(req.body);
   res.send('event made');
 });
+
+app.post('/makeevent', (req, res) => {
+  console.log(req.body, 'event body');
+  req.body.attendees = {};
+  Event.createEvent(req.body);
+  res.redirect('/userpage')
+});
+
 /**
  * Route to get events for both user, and events page
  * @param req.body, if it contains the username, then get
@@ -58,7 +68,10 @@ app.get('/events', (req, res) => {
   }
 });
 
-app.get('/users');
+app.post('/addAttendee', (req, res) => {
+  console.log(req.params);
+  Event.findOneandUpdate({ title: req.params.title }, { attendees: { [req.param.username]: true } });
+});
 
 app.get('*', (req, res) => {
   res.sendFile(Path.resolve(__dirname, './server/static/index.html'));

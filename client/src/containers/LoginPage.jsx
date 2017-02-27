@@ -83,6 +83,11 @@ class LoginPage extends React.Component {
       user,
     });
   }
+  componentWillUpdate(nextprops, nextState) {
+    localStorage.setItem('email', nextState.user.email);
+    fetch('/users', { method: 'GET', body: { email: nextState.user.email } })
+      .then(username => this.setState(username));
+  }
 
   /**
    * Render the component.
