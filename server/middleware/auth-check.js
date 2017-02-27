@@ -24,7 +24,7 @@ module.exports = (req, res, next) => {
       if (userErr || !user) {
         return res.status(401).end();
       }
-
+      req.user = user.username;
       return next();
     });
   });

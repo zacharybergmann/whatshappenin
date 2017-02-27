@@ -1,33 +1,25 @@
 import React from 'react';
-// import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import TimePicker from 'material-ui/TimePicker'
+import TimePicker from 'material-ui/TimePicker';
 import DatePicker from 'material-ui/DatePicker';
 
 const style = {
   marginLeft: 20,
 };
 
-const EventForm = () => {
+const EventForm = ({ eventDetails, eveChange, processForm, handleTime, handleDate }) => {
   return (
-    // username: String,
-    // name: String,
-    // eventTime: String,
-    // location: String,
-    // createdAt: String, // In the format of "2/16/2017, 8:28:03 PM"
-    // tags: String,
-    // businessName: String,
-    // picLink: String, // Link to hosted picture
-    // busLink: String, // url to business' homepage
-    // description: String,
-    <form action="/makeevent" method="post">
+
+    <form action="/" onSubmit={processForm}>
       <div>
         <TextField
           name="name"
           type="name"
-          hintText="Who are you?"
+          hintText="What's the party called?"
           style={style}
+          value={eventDetails.name}
+          onChange={eveChange}
         />
       </div>
       <div>
@@ -36,34 +28,78 @@ const EventForm = () => {
           type="location"
           hintText="Where tha party at?!"
           style={style}
+          value={eventDetails.location}
+          onChange={eveChange}
         />
       </div>
       <div>
         <TimePicker
-          name="time"
+          name="eventTime"
+          type="eventTime"
           hintText="12hr Format"
           style={style}
+          onChange={handleTime}
+          value={eventDetails.eventTime}
         />
       </div>
       <div>
         <DatePicker
+          type="eventDate"
           hintText="Portrait Dialog"
-          name="date"
+          name="eventDate"
           style={style}
+          onChange={handleDate}
+          value={eventDetails.eventDate}
         />
       </div>
       <div>
         <TextField
-          name="description"
-          type="description"
-          hintText="Describe your sweet event" style={style}
+          name="picLink"
+          type="picLink"
+          hintText="Got an image link to share?"
+          style={style}
+          value={eventDetails.picLink}
+          onChange={eveChange}
+        />
+      </div>
+      <div>
+        <TextField
+          name="busLink"
+          type="busLink"
+          hintText="Promote your business' website"
+          style={style}
+          value={eventDetails.busLink}
+          onChange={eveChange}
+        />
+      </div>
+      <div>
+        <TextField
+          name="businessName"
+          type="businessName"
+          hintText="Are you a business? What's your name?"
+          style={style}
+          value={eventDetails.businessName}
+          onChange={eveChange}
         />
       </div>
       <div>
         <TextField
           name="tags"
           type="tags"
-          hintText="tags" style={style}
+          hintText="tags"
+          style={style}
+          value={eventDetails.tags}
+          onChange={eveChange}
+        />
+      </div>
+      <div>
+        <TextField
+          name="description"
+          type="description"
+          hintText="Describe your sweet event"
+          style={style}
+          value={eventDetails.description}
+          onChange={eveChange}
         />
       </div>
       <div>

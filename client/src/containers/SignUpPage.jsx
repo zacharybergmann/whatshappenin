@@ -43,37 +43,29 @@ class SignUpPage extends React.Component {
     const location = encodeURIComponent(this.state.user.location);
     const formData = `username=${username}&name=${name}&email=${email}&password=${password}&location=${location}`;
 
-    // create an AJAX request
-    const xhr = new XMLHttpRequest();
-    xhr.open('post', '/auth/signup');
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.responseType = 'json';
-    xhr.addEventListener('load', () => {
-      if (xhr.status === 200) {
-        // success
-
-        // change the component-container state
+    fetch('/auth/signup', {
+      method: 'POST',
+      headers: new Headers({
+        'Content-type': 'application/x-www-form-urlencoded',
+      }),
+      body: formData,
+    }).then(res => res.json())
+    .then((res) => {
+      if (res.success === false) {
+        this.setState({
+          errors: res.errors,
+        });
+      } else {
         this.setState({
           errors: {},
         });
-
-        // set a message
-        localStorage.setItem('successMessage', xhr.response.message);
-
-        // make a redirect
+        localStorage.setItem('successMessage', res.message);
         this.context.router.replace('/login');
-      } else {
-        // failure
-
-        const errors = xhr.response.errors ? xhr.response.errors : {};
-        errors.summary = xhr.response.message;
-
-        this.setState({
-          errors,
-        });
       }
+    })
+    .catch((err) => {
+      throw new Error(err);
     });
-    xhr.send(formData);
   }
 
   /**
