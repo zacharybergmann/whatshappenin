@@ -38,17 +38,21 @@ class Map extends React.Component {
       },
       googleKey: null,
     };
+    this.setStateGeoLocate = this.setStateGeoLocate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
     navigator.geolocation.getCurrentPosition((location) => {
-      this.setState({ location: location.coords });
+      fetch(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}`)
+      .then(response => response.json())
+      .then((json) => {
+        this.setStateGeoLocate(json);
+      });
     });
   }
   componentWillReceiveProps(nextprops) {
-    console.log(nextprops,'nextcoord')
     if (nextprops.coordinates) {
       const latitude = +nextprops.coordinates.latitude;
       const longitude = +nextprops.coordinates.longitude;
@@ -61,6 +65,30 @@ class Map extends React.Component {
         },
       });
     }
+  }
+
+  /**
+   *
+   * @param {json} Json object from Google API call
+   *
+   * @returns Sets the location of the map
+   *     location parameter to the geolocation's coordinates.
+   * @param {geocode} sets the location for the form data
+   * @param {setState} sets the location for the map to centralize
+  */
+  setStateGeoLocate(json) {
+    this.setState({
+      location: {
+        latitude: json.results[0].geometry.location.lat,
+        longitude: json.results[0].geometry.location.lng,
+        address: json.results[0].formatted_address
+      },
+    });
+    this.props.geoCode({
+      latitude: json.results[0].geometry.location.lat,
+      longitude: json.results[0].geometry.location.lng,
+      address: json.results[0].formatted_address,
+    });
   }
   /**
    *
@@ -76,23 +104,9 @@ class Map extends React.Component {
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.search}`)
     .then(response => response.json())
     .then((json) => {
-      this.setState({
-        location: {
-          latitude: json.results[0].geometry.location.lat,
-          longitude: json.results[0].geometry.location.lng,
-          address: json.results[0].formatted_address
-        },
-      });
-      if (this.props.geoCode) {
-        this.props.geoCode({
-          latitude: json.results[0].geometry.location.lat,
-          longitude: json.results[0].geometry.location.lng,
-          address: json.results[0].formatted_address,
-        });
-      }
+      this.setStateGeoLocate(json);
     });
   }
-
 /**
  *
  * @param {event} form submission event
