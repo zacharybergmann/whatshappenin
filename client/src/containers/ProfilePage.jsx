@@ -61,7 +61,7 @@ class ProfilePage extends React.Component {
     this.setState({ detailsBox });
   }
 
-  setCoordinates(location) {
+  setCoordinates(event) {
     this.setState({ location });
   }
   /**
@@ -166,7 +166,7 @@ class ProfilePage extends React.Component {
               location={this.state.location}
             />
             <Map coordinates={this.state.location} geoCode={this.setCoordinates} />
-            <EventDetail event={this.state.detailsBox} />
+            <EventDetail event={this.state.detailsBox} setCoordinates={this.setCoordinates}/>
           </section>
           <section id="userprofile" className="col-lg-4" />
           <sidebar className="col-lg-4">

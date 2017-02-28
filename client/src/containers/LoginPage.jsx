@@ -77,11 +77,17 @@ class LoginPage extends React.Component {
       body: formData,
     }).then(res => res.json())
     .then((data) => {
-      this.setState({
-        errors: {},
-      });
-      Auth.authenticateUser(data.token);
-      this.context.router.replace('/');
+      if (data.success === false) {
+        this.setState({
+          errors: data.errors,
+        });
+      } else {
+        this.setState({
+          errors: {},
+        });
+        Auth.authenticateUser(data.token);
+        this.context.router.replace('/');
+      }
     })
     .catch((err) => {
       this.setState({
