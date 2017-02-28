@@ -1,4 +1,4 @@
-  import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 /**
 *
@@ -6,27 +6,26 @@
 * @returns parsed string, allows the map to be updated with new
 * coordinates when the event location is clicked;
 */
-  const parseCoordinates = function parseCoordinates(coordString) {
-    console.log(coordString,'coordinates')
-    let coordinates = coordString.split('longitude');
-    const coordinateObj = {
-      address: coordinates[0]
-    };
-    coordinates = coordinates[1].split(' ');
-    coordinateObj.latitude = +coordinates[coordinates.length - 1];
-    coordinateObj.longitude = +coordinates[1];
-
-    return coordinateObj;
+const parseCoordinates = function parseCoordinates(coordString) {
+  let coordinates = coordString.split('longitude');
+  const coordinateObj = {
+    address: coordinates[0]
   };
+  coordinates = coordinates[1].split(' ');
+  coordinateObj.latitude = +coordinates[coordinates.length - 1];
+  coordinateObj.longitude = +coordinates[1];
 
-  const Event = ({ event, event: {
-    title,
-    eventTime,
-    username,
-    eventDate,
-    businessName,
-    busLink
-  }, setCoordinates, setDetailsBox }) => {
+  return coordinateObj;
+};
+
+const Event = ({ event, event: {
+  title,
+  eventTime,
+  username,
+  eventDate,
+  businessName,
+  busLink
+}, setCoordinates, setDetailsBox }) => {
 /* setDetailsBox passed down from mappage
  * @param {props.event} an event item
  * @returns sets the Event details box to this event
@@ -65,8 +64,8 @@
 };
 
 
-  Event.propTypes = {
-    event: PropTypes.object.isRequired,
-  };
+Event.propTypes = {
+  event: PropTypes.object.isRequired,
+};
 
-  export default Event;
+export default Event;

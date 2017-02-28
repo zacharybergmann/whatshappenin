@@ -152,9 +152,9 @@ class ProfilePage extends React.Component {
     const picLink = encodeURIComponent(eveDet.picLink);
     const busLink = encodeURIComponent(eveDet.busLink);
     const description = encodeURIComponent(eveDet.description);
-    const location = encodeURIComponent(`${eveDet.location.address}longitude: ${eveDet.location.longitude}
-       , latitude: ${eveDet.location.latitude}`);
-    const formData = `title=${title}&eventTime=${eventTime}&eventDate=${eventDate}&tags=${tags}&businessName=${businessName}&picLink=
+    const location = encodeURIComponent(`${eveDet.location.address}longitude: ${eveDet.location.longitude}\
+  , latitude: ${eveDet.location.latitude}`);
+    const formData = `title=${title}&eventTime=${eventTime}&eventDate=${eventDate}&tags=${tags}&businessName=${businessName}&picLink=\
         ${picLink}&busLink=${busLink}&description=${description}&location=${location}`;
     fetch('/api/makeevent', {
       method: 'POST',
