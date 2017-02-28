@@ -48,13 +48,16 @@ class Map extends React.Component {
     });
   }
   componentWillReceiveProps(nextprops) {
+    console.log(nextprops,'nextcoord')
     if (nextprops.coordinates) {
       const latitude = +nextprops.coordinates.latitude;
       const longitude = +nextprops.coordinates.longitude;
+      const address = nextprops.coordinates.address;
       this.setState({
         location: {
           latitude: latitude,
           longitude: longitude,
+          address: address
         },
       });
     }
@@ -76,12 +79,14 @@ class Map extends React.Component {
         location: {
           latitude: json.results[0].geometry.location.lat,
           longitude: json.results[0].geometry.location.lng,
+          address: json.results[0].formatted_address
         },
       });
       if (this.props.geoCode) {
         this.props.geoCode({
           latitude: json.results[0].geometry.location.lat,
           longitude: json.results[0].geometry.location.lng,
+          address: json.results[0].formatted_address,
         });
       }
     });
@@ -126,6 +131,7 @@ class Map extends React.Component {
             lat={this.state.location.latitude}
             lng={this.state.location.longitude}
             onCloseClick={this.onCloseClick}
+            content={this.state.location.address}
           />
         </Gmaps>
       </div>

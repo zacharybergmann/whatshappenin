@@ -115,9 +115,11 @@ class ProfilePage extends React.Component {
   processEventForm(event) {
     event.preventDefault();
     const eveDet = this.state.eventDetails;
+    console.log(this.state.location);
     eveDet.location = {
       longitude: this.state.location.longitude,
       latitude: this.state.location.latitude,
+      address: this.state.location.address,
     };
     // create a string for an HTTP body message
     const title = encodeURIComponent(eveDet.title);
@@ -128,7 +130,7 @@ class ProfilePage extends React.Component {
     const picLink = encodeURIComponent(eveDet.picLink);
     const busLink = encodeURIComponent(eveDet.busLink);
     const description = encodeURIComponent(eveDet.description);
-    const location = encodeURIComponent(`longitude: ${eveDet.location.longitude}
+    const location = encodeURIComponent(`${eveDet.location.address}longitude: ${eveDet.location.longitude}
        , latitude: ${eveDet.location.latitude}`);
     const formData = `title=${title}&eventTime=${eventTime}&eventDate=${eventDate}&tags=${tags}&businessName=${businessName}&picLink=
         ${picLink}&busLink=${busLink}&description=${description}&location=${location}`;

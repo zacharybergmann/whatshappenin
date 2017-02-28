@@ -81,3 +81,10 @@ article.eventdetail {
   max-width: 40px;
   max-height: 40px;
 }
+sidebar {
+    max-height: 900px;
+    overflow-y: scroll;
+}
+div.top-bar {
+  background-color:
+}
