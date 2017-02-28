@@ -19,7 +19,14 @@
     return coordinateObj;
   };
 
-const Event = ({ event, setCoordinates, setDetailsBox }) => {
+  const Event = ({ event, event: {
+    title,
+    eventTime,
+    username,
+    eventDate,
+    businessName,
+    busLink
+  }, setCoordinates, setDetailsBox }) => {
 /* setDetailsBox passed down from mappage
  * @param {props.event} an event item
  * @returns sets the Event details box to this event
@@ -45,19 +52,21 @@ const Event = ({ event, setCoordinates, setDetailsBox }) => {
   return (
     <article className="eventdetail">
       <div className="eventlistbox">
-        <a onClick={setDetBox}>{event.title}</a>
-        <div>Poster: {event.username}</div>
-        <div>Event Time: {event.eventTime}</div>
-        <div>Event Date: {event.eventDate}</div>
+        <a onClick={setDetBox}>{title}</a>
+        <div>Poster: {username}</div>
+        <div>Event Time: {eventTime}</div>
+        <div>Event Date: {eventDate}</div>
         <a onClick={setCoords}>Show Location on Map</a>
-        {event.businessName !== '' && <div>Business: {event.businessName}</div>}
-        {event.busLink !== '' && <a target="_blank" rel="noopener noreferrer" href={event.busLink}>Website</a>}
+        {businessName !== '' && <div>Business: {businessName}</div>}
+        {busLink !== '' && <a target="_blank" rel="noreferrer noopener" href={busLink}>Website</a>}
       </div>
     </article>
   );
 };
 
+
   Event.propTypes = {
     event: PropTypes.object.isRequired,
   };
+
   export default Event;

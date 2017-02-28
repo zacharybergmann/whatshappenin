@@ -8,7 +8,6 @@ const router = new express.Router();
 
 router.post('/signup', (req, res, next) => {
   const validationResult = validate.validateSignupForm(req.body);
-  console.log(validationResult);
   if (!validationResult.success) {
     return res.status(400).json({
       success: false,
@@ -46,9 +45,7 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-  console.log(req.body);
   const validationResult = validate.validateLoginForm(req.body);
-  console.log(validationResult, 'LOGIN');
   if (!validationResult.success) {
     return res.status(400).json({
       success: false,

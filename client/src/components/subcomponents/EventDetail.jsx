@@ -13,20 +13,21 @@ const parseCoordinates = (coordString) => {
 
 const EventDetail = ({
   event: {
+    picLink,
     title,
     eventTime,
     eventDate,
-    location,
+    businessName,
+    busLink,
     description,
     tags,
-    picLink,
   },
   setCoordinates,
 }) => {
-  function setCoords() {
-    const coordinates = parseCoordinates(location);
-    setCoordinates(coordinates);
-  }
+  // function setCoords() {
+  //   const coordinates = parseCoordinates(location);
+  //   setCoordinates(coordinates);
+  // }
 
   return (
     <article className="eventdetail">
@@ -42,6 +43,12 @@ const EventDetail = ({
           <div>Event Date: {eventDate}</div>
 
           <a onClick={setCoords}>Show Location on Map</a>
+
+          {businessName !== '' && <div>Business: {businessName}</div>}
+          {busLink !== '' && <a target="_blank" rel="noreferrer noopener" href={busLink}>Website</a>}
+          <br />
+          {/* <a onClick={setCoords}>Show Location on Map</a> */}
+
           <p>{description}</p>
           <div>{tags}</div>
         </div>
@@ -50,5 +57,11 @@ const EventDetail = ({
   );
 };
 
+
+// EventDetail.propTypes = {
+//   event: React.Proptypes.Object.isRequired,
+// };
+//
+//
 
 export default EventDetail;

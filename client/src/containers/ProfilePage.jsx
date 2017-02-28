@@ -62,8 +62,8 @@ class ProfilePage extends React.Component {
     this.setState({ detailsBox });
   }
 
-  setCoordinates(event) {
-    this.setState({ location });
+  setCoordinates(coordinates) {
+    this.setState({ location: coordinates });
   }
   /**
    * Change the eventDetails object.
