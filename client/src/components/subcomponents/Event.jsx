@@ -63,7 +63,6 @@ const Event = ({ event, event: {
   );
 };
 
-
 Event.propTypes = {
   event: PropTypes.object.isRequired,
 };
