@@ -123,6 +123,8 @@ const EventForm = ({
         <RaisedButton type="submit" label="make an Event" />
       </div>
     </form>
+  );
+};
 
 EventForm.propTypes = {
   eventDetails: React.PropTypes.object.isRequired,

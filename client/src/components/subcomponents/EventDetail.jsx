@@ -24,10 +24,10 @@ const EventDetail = ({
   },
   setCoordinates,
 }) => {
-  // function setCoords() {
-  //   const coordinates = parseCoordinates(location);
-  //   setCoordinates(coordinates);
-  // }
+  function setCoords() {
+    const coordinates = parseCoordinates(location);
+    setCoordinates(coordinates);
+  }
 
   return (
     <article className="eventdetail">
