@@ -40,6 +40,11 @@ const EventDetail = ({ event: { name,
     setCoordinates(coordinates);
   }
 
+  /**
+   * Constructs a url link to the google calender 'add event' page for the clicked event
+   * and opens the link in a new tab in the browser
+   *
+   */
   function linkToCalender() {
     const dateTime = `${eventDateObj.slice(0, 10)}T${eventTimeObj.slice(11)}`
       .replace(/-|:|\.\d\d\d/g, '');
@@ -58,7 +63,9 @@ const EventDetail = ({ event: { name,
           <a>{title}</a>
           <div>Event Time: {eventTime}</div>
           <div>Event Date: {eventDate}</div>
+
           <button type="button" onClick={setMap}>Show Location on Map</button>
+
           {businessName !== '' && <div>Business: {businessName}</div>}
           {busLink !== '' && <a target="_blank" rel="noreferrer noopener" href={busLink}>Website</a>}
           <br />
@@ -73,7 +80,7 @@ const EventDetail = ({ event: { name,
 };
 
 // EventDetail.propTypes = {
-//   event: React.Proptypes.Object.isRequired,
+//   event: React.Proptypes.object.isRequired,
 // };
 
 export default EventDetail;

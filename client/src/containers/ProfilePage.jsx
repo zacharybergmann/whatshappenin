@@ -95,16 +95,8 @@ class ProfilePage extends React.Component {
    * @param {date object} - the time selected through the TimePicker
    */
   handleTime(event, time) {
-    function getFormattedTime(fourDigitTime) {
-      const hours24 = parseInt(fourDigitTime.substring(0, 2), 10);
-      const hours = ((hours24 + 11) % 12) + 1;
-      const amPm = hours24 > 11 ? 'pm' : 'am';
-      const minutes = fourDigitTime.substring(2);
-
-      return `${hours}:${minutes}${amPm}`;
-    }
-    const newTime = `${time.toString().slice(16, 21).replace(/:/, '')
-      .replace(/(\d+)/g, match => getFormattedTime(match))} ${time.toString().slice(34)}`;
+    let newTime = time.toLocaleString().split(',')[1].trim();
+    newTime = `${newTime.slice(0, 4)} ${newTime.slice(newTime.length - 2)}`;
 
     const ev = this.state.eventDetails;
     ev.eventTimeObj = time;
