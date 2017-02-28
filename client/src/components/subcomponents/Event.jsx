@@ -51,11 +51,11 @@ const Event = ({ event, event: {
   return (
     <article className="eventdetail">
       <div className="eventlistbox">
-        <a onClick={setDetBox}>{title}</a>
+        <button type="button" onClick={setDetBox}>{title}</button>
         <div>Poster: {username}</div>
         <div>Event Time: {eventTime}</div>
         <div>Event Date: {eventDate}</div>
-        <a onClick={setCoords}>Show Location on Map</a>
+        <button type="button" onClick={setCoords}>Show Location on Map</button>
         {businessName !== '' && <div>Business: {businessName}</div>}
         {busLink !== '' && <a target="_blank" rel="noreferrer noopener" href={busLink}>Website</a>}
       </div>
