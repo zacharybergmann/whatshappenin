@@ -42,13 +42,9 @@ const EventDetail = ({
           <img src={picLink}></img>
           <br />
           <a>{title}</a>
-
           <div>Event Time: {eventTime}</div>
-
           <div>Event Date: {eventDate}</div>
-
           <button type="button" onClick={setCoords}>Show Location on Map</button>
-
           {businessName !== '' && <div>Business: {businessName}</div>}
           {busLink !== '' && <a target="_blank" rel="noreferrer noopener" href={busLink}>Website</a>}
           <br />
@@ -61,10 +57,4 @@ const EventDetail = ({
   );
 };
 
-<<<<<<< HEAD
-=======
-// EventDetail.propTypes = {
-//   event: React.PropType.object.isRequired,
-// };
->>>>>>> (CSS)Adds CSS to many of the main pages
 export default EventDetail;
