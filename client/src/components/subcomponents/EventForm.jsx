@@ -124,10 +124,7 @@ const EventForm = ({
       <div>
         <RaisedButton onClick={closeDrawer} type="submit" label="Post Event" />
       </div>
-    </form>
-  );
-};
-
+    </form>;
 EventForm.propTypes = {
   eventDetails: React.PropTypes.object.isRequired,
   eveChange: React.PropTypes.func.isRequired,
