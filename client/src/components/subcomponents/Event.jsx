@@ -7,7 +7,6 @@
 * coordinates when the event location is clicked;
 */
   const parseCoordinates = function parseCoordinates(coordString) {
-    console.log(coordString,'coordinates')
     let coordinates = coordString.split('longitude');
     const coordinateObj = {
       address: coordinates[0]
@@ -48,7 +47,7 @@
     return (
       <article className="eventdetail">
         <div className="eventlistbox">
-          <button type="button" >Display: {props.event.title} </button>
+          <button onClick={setDetailsBox} type="button" >Display: {props.event.title} </button>
           <div>EventTime: {props.event.time}.</div>
           <button type="button" onClick={setCoordinates}>location:{props.event.location}</button>
           <p>{props.event.description}</p>

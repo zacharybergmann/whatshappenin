@@ -154,7 +154,7 @@ class ProfilePage extends React.Component {
     return (
       <main className="container">
         <div id="userpage">
-          <section>
+          <section id="map">
             {this.state.successMessage &&
               <CardText className="success-message">{this.state.successMessage}</CardText>}
             <EventForm

@@ -7,6 +7,7 @@ import EventList from './subcomponents/eventList.jsx';
 const Dashboard = ({ data, setEveList, setDetBox, setCoordinates, coordinates }) => (
   <Card className="container">
     <CardTitle
+      className="cardTitle"
       title="Whats Happenin'"
       subtitle="Find local hit events!"
     />
@@ -16,7 +17,7 @@ const Dashboard = ({ data, setEveList, setDetBox, setCoordinates, coordinates })
           <section >
             <Map setCoordinates={setCoordinates} coordinates={coordinates} />
             <article id="EventDetail">
-              <EventDetail event={data.detailsBox} />
+              <EventDetail setCoordinates={setCoordinates} event={data.detailsBox} />
             </article>
           </section>
         </section>

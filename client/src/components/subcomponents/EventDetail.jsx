@@ -1,18 +1,48 @@
 import React from 'react';
+/**
+*
+* @param {coordinate string} will be a set of coordinates
+* @returns parsed string, allows the map to be updated with new
+* coordinates when the event location is clicked;
+*/
+const parseCoordinates = function parseCoordinates(coordString) {
+  let coordinates = coordString.split('longitude');
+  const coordinateObj = {
+    address: coordinates[0]
+  };
+  coordinates = coordinates[1].split(' ');
+  coordinateObj.latitude = +coordinates[coordinates.length - 1];
+  coordinateObj.longitude = +coordinates[1];
 
-const EventDetail = ({ event: { name, time, location, description, tags } }) =>
-  <article className="eventdetail">
-    <img alt="" id="image" className="col-sm-2" />
-    <section className="eventdescription">
-      <div className="col-md-3">
-        <a>{name}</a>
-        <div>eventTime: {time}.</div>
-        <a>location:{location}</a>
-        <p>{description}</p>
-        <div>{tags}</div>
-      </div>
-    </section>
-  </article>
+  return coordinateObj;
+};
 
+const EventDetail = ({ event: { name, time, location, description, tags }, setCoordinates }) => {
+  /* setMap passed down from event page, from the map page
+   * @param {event location} an event item's location
+   * @returns sets the coordinates on profile/dashboard, and changes map coordinates
+   */
+  function setMap() {
+    const coordinates = parseCoordinates(location);
+    setCoordinates(coordinates);
+  }
 
+  return (
+    <article className="eventdetail">
+      <img alt="" id="image" className="col-sm-2" />
+      <section className="eventdescription">
+        <div className="col-md-3">
+          <div>{name}</div>
+          <div>eventTime: {time}.</div>
+          <button type="button" onClick={setMap} >location:{location}</button>
+          <p>{description}</p>
+          <div>{tags}</div>
+        </div>
+      </section>
+    </article>
+  );
+};
+// EventDetail.propTypes = {
+//   event: React.PropType.object.isRequired,
+// };
 export default EventDetail;
