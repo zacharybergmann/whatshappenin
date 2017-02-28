@@ -13,46 +13,28 @@ const parseCoordinates = function parseCoordinates(coordString) {
   coordinates = coordinates[1].split(' ');
   coordinateObj.latitude = +coordinates[coordinates.length - 1];
   coordinateObj.longitude = +coordinates[1];
-}
 
-const EventDetail = ({
-  event: {
-    picLink,
-    title,
-    eventTime,
-    eventDate,
-    businessName,
-    busLink,
-    description,
-    tags,
-  },
-  setCoordinates,
-}) => {
-  function setCoords() {
+  return coordinateObj;
+};
+
+const EventDetail = ({ event: { name, time, location, description, tags }, setCoordinates }) => {
+  /* setMap passed down from event page, from the map page
+   * @param {event location} an event item's location
+   * @returns sets the coordinates on profile/dashboard, and changes map coordinates
+   */
+  function setMap() {
     const coordinates = parseCoordinates(location);
     setCoordinates(coordinates);
   }
 
   return (
     <article className="eventdetail">
-
+      <img alt="" id="image" className="col-sm-2" />
       <section className="eventdescription">
         <div className="col-md-3">
-          <img src={picLink}></img>
-          <br />
-          <a>{title}</a>
-
-          <div>Event Time: {eventTime}</div>
-
-          <div>Event Date: {eventDate}</div>
-
-          <a onClick={setCoords}>Show Location on Map</a>
-
-          {businessName !== '' && <div>Business: {businessName}</div>}
-          {busLink !== '' && <a target="_blank" rel="noreferrer noopener" href={busLink}>Website</a>}
-          <br />
-          {/* <a onClick={setCoords}>Show Location on Map</a> */}
-
+          <div>{name}</div>
+          <div>eventTime: {time}.</div>
+          <button type="button" onClick={setMap} >location:{location}</button>
           <p>{description}</p>
           <div>{tags}</div>
         </div>
@@ -60,7 +42,6 @@ const EventDetail = ({
     </article>
   );
 };
-
 // EventDetail.propTypes = {
 //   event: React.PropType.object.isRequired,
 // };

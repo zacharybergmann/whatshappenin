@@ -8,9 +8,6 @@ import Map from '../components/subcomponents/Map.jsx';
 import Drawer from 'material-ui/Drawer';
 import RaisedButton from 'material-ui/RaisedButton';
 
-/* global localStorage, XMLHttpRequest */
-
-
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
@@ -195,14 +192,9 @@ class ProfilePage extends React.Component {
           <section id="map">
             {this.state.successMessage &&
               <CardText className="success-message">{this.state.successMessage}</CardText>}
-            <EventForm
-              eventDetails={this.state.eventDetails}
-              eveChange={this.changeEvent}
-              processForm={this.processEventForm}
-              handleTime={this.handleTime}
-              handleDate={this.handleDate}
-              location={this.state.location}
-              errors={this.state.errors}
+            <RaisedButton
+              label="makeevent"
+              onTouchTap={this.handleToggle}
             />
             <Drawer
               openSecondary
