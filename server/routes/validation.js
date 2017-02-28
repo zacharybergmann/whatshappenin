@@ -110,6 +110,7 @@ module.exports = {
       errors.eventDate = 'That date has passed!';
     }
 
+    payload.picLink = payload.picLink.trim();
     if (payload.picLink !== '' && !validator.isURL(payload.picLink)) {
       isFormValid = false;
       errors.picLink = 'Please provide a valid link to your hosted image.';

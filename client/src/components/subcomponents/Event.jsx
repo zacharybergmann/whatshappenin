@@ -24,7 +24,8 @@ const Event = ({ event, event: {
   username,
   eventDate,
   businessName,
-  busLink
+  busLink,
+  location,
 }, setCoordinates, setDetailsBox }) => {
 /* setDetailsBox passed down from mappage
  * @param {props.event} an event item
@@ -35,13 +36,13 @@ const Event = ({ event, event: {
   }
 
   function setCoords() {
-    const coordinates = parseCoordinates(event.location);
+    const coordinates = parseCoordinates(location);
     setCoordinates(coordinates);
   }
 
   const addAttendee = function addAttendee() {
     fetch('/addAttendee', { method: 'POST',
-      params: { username: localStorage.getItem('email'), event: event.title }
+      params: { username: localStorage.getItem('email'), event: title }
     }).then((attended) => {
       if (attended) {
         event.attendees += 1;
@@ -55,7 +56,7 @@ const Event = ({ event, event: {
         <div>Poster: {username}</div>
         <div>Event Time: {eventTime}</div>
         <div>Event Date: {eventDate}</div>
-        <button type="button" onClick={setCoords}>Show Location on Map</button>
+        <button type="button" onClick={setCoords}>Location: {location}</button>
         {businessName !== '' && <div>Business: {businessName}</div>}
         {busLink !== '' && <a target="_blank" rel="noreferrer noopener" href={busLink}>Website</a>}
       </div>
