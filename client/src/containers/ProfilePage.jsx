@@ -23,15 +23,15 @@ class ProfilePage extends React.Component {
       eventDetails: {
         username: '',
         title: '',
-        eventTime: '',
-        eventDate: '',
+        eventTime: {},
+        eventDate: {},
         tags: '',
         businessName: '',
         picLink: '',
         busLink: '',
         description: '',
-        eventTimeObj: '',
-        eventDateObj: '',
+        eventTimeObj: {},
+        eventDateObj: {},
       },
       location: {
         longitude: null,
@@ -205,6 +205,7 @@ class ProfilePage extends React.Component {
               width={400}
             >
               <EventForm
+                errors={this.state.errors}
                 closeDrawer={this.handleToggle}
                 eventDetails={this.state.eventDetails}
                 eveChange={this.changeEvent}
