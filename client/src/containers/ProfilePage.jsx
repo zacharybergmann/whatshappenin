@@ -8,8 +8,6 @@ import Map from '../components/subcomponents/Map.jsx';
 import Drawer from 'material-ui/Drawer';
 import RaisedButton from 'material-ui/RaisedButton';
 
-/* global localStorage, XMLHttpRequest */
-
 
 class ProfilePage extends React.Component {
   constructor(props) {
