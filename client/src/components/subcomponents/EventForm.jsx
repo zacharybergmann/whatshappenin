@@ -37,8 +37,8 @@ const EventForm = ({
           type="location"
           hintText="Where tha party at?!"
           style={style}
-          value={`${location.address}\
-          longitude: ${location.longitude},\
+          value={`${location.address} \
+          longitude: ${location.longitude}, \
           latitude: ${location.latitude}`}
           onChange={eveChange}
         />
