@@ -61,4 +61,10 @@ const EventDetail = ({
   );
 };
 
+<<<<<<< HEAD
+=======
+// EventDetail.propTypes = {
+//   event: React.PropType.object.isRequired,
+// };
+>>>>>>> (CSS)Adds CSS to many of the main pages
 export default EventDetail;
