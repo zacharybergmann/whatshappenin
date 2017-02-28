@@ -29,6 +29,7 @@ class ProfilePage extends React.Component {
         longitude: null,
         latitude: null,
       },
+      errors: {},
       successMessage: null,
     };
 
@@ -143,9 +144,17 @@ class ProfilePage extends React.Component {
       body: formData,
     }).then(res => res.json())
     .then((res) => {
-      this.setState({
-        successMessage: res.message,
-      });
+      if (res.success === false) {
+        this.setState({
+          errors: res.errors,
+          successMessage: null,
+        });
+      } else {
+        this.setState({
+          errors: {},
+          successMessage: res.message,
+        });
+      }
     })
     .catch(err => `Whoops: ${err}`);
   }
@@ -164,9 +173,10 @@ class ProfilePage extends React.Component {
               handleTime={this.handleTime}
               handleDate={this.handleDate}
               location={this.state.location}
+              errors={this.state.errors}
             />
             <Map coordinates={this.state.location} geoCode={this.setCoordinates} />
-            <EventDetail event={this.state.detailsBox} setCoordinates={this.setCoordinates}/>
+            <EventDetail event={this.state.detailsBox} setCoordinates={this.setCoordinates} />
           </section>
           <section id="userprofile" className="col-lg-4" />
           <sidebar className="col-lg-4">

@@ -1,5 +1,6 @@
 const express = require('express');
 const Event = require('../controllers/events');
+const validate = require('./validation');
 
 
 const router = new express.Router();
@@ -11,6 +12,14 @@ router.get('/dashboard', (req, res) => {
 });
 
 router.post('/makeevent', (req, res) => {
+  const validationResult = validate.validateEventForm(req.body);
+  if (!validationResult.success) {
+    return res.status(400).json({
+      success: false,
+      message: validationResult.message,
+      errors: validationResult.errors,
+    });
+  }
   req.body.username = req.user;
   Event.createEvent(req.body);
   res.status(200).json({

@@ -57,7 +57,6 @@ module.exports = {
    *                   errors tips, and a global message for the whole form.
    */
   validateLoginForm(payload) {
-    console.log(payload, 'PAYLOAD');
     const errors = {};
     let isFormValid = true;
     let message = '';
@@ -75,7 +74,55 @@ module.exports = {
     if (!isFormValid) {
       message = 'Check the form for errors.';
     }
-    console.log(isFormValid, 'IS FORM VALID');
+
+    return {
+      success: isFormValid,
+      message,
+      errors,
+    };
+  },
+
+  validateEventForm(payload) {
+    const errors = {};
+    let isFormValid = true;
+    let message = '';
+
+    if (!payload || typeof payload.title !== 'string' || payload.title.trim().length === 0) {
+      isFormValid = false;
+      errors.title = 'Please provide your party\'s title.';
+    }
+
+    if (!payload || typeof payload.location !== 'string' || validator.contains(payload.location, 'null') || validator.contains(payload.location, 'undefined')) {
+      isFormValid = false;
+      errors.title = 'Please provide your party\'s location.';
+    }
+
+    if (!payload || typeof payload.eventTime !== 'string' || payload.eventTime.trim().length === 0) {
+      isFormValid = false;
+      errors.eventTime = 'Please provide your party\'s time.';
+    }
+
+    if (!payload || typeof payload.eventDate !== 'string' || payload.eventDate.trim().length === 0) {
+      isFormValid = false;
+      errors.eventDate = 'Please provide your party\'s date.';
+    } else if (validator.isBefore(payload.eventDate)) {
+      isFormValid = false;
+      errors.eventDate = 'That date has passed!';
+    }
+
+    if (payload.picLink !== '' && !validator.isURL(payload.picLink)) {
+      isFormValid = false;
+      errors.picLink = 'Please provide a valid link to your hosted image.';
+    }
+
+    if (payload.busLink !== '' && !validator.isURL(payload.busLink)) {
+      isFormValid = false;
+      errors.busLink = 'Please provide a valid link to your business.';
+    }
+
+    if (!isFormValid) {
+      message = 'Check the form for errors.';
+    }
 
     return {
       success: isFormValid,

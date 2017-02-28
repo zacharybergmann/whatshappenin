@@ -15,7 +15,10 @@ const EventForm = ({
   processForm,
   handleTime,
   handleDate,
-  location }) =>
+  location,
+  errors,
+}) => {
+  return (
     <form action="/" onSubmit={processForm}>
       <div>
         <TextField
@@ -25,6 +28,7 @@ const EventForm = ({
           style={style}
           value={eventDetails.title}
           onChange={eveChange}
+          errorText={errors.title}
         />
       </div>
       <div>
@@ -38,6 +42,7 @@ const EventForm = ({
           longitude: ${location.longitude},
           latitude: ${location.latitude}`}
           onChange={eveChange}
+          errorText={errors.location}
         />
       </div>
       <div>
@@ -48,16 +53,18 @@ const EventForm = ({
           style={style}
           onChange={handleTime}
           value={eventDetails.eventTime}
+          errorText={errors.eventTime}
         />
       </div>
       <div>
         <DatePicker
           type="eventDate"
-          hintText="Portrait Dialog"
+          hintText="Date"
           name="eventDate"
           style={style}
           onChange={handleDate}
           value={eventDetails.eventDate}
+          errorText={errors.eventDate}
         />
       </div>
       <div>
@@ -68,6 +75,7 @@ const EventForm = ({
           style={style}
           value={eventDetails.picLink}
           onChange={eveChange}
+          errorText={errors.picLink}
         />
       </div>
       <div>
@@ -78,13 +86,14 @@ const EventForm = ({
           style={style}
           value={eventDetails.busLink}
           onChange={eveChange}
+          errorText={errors.busLink}
         />
       </div>
       <div>
         <TextField
           name="businessName"
           type="businessName"
-          hintText="Are you a business? What's your name?"
+          hintText="What's your business' name?"
           style={style}
           value={eventDetails.businessName}
           onChange={eveChange}
@@ -113,7 +122,7 @@ const EventForm = ({
       <div>
         <RaisedButton type="submit" label="make an Event" />
       </div>
-    </form>;
+    </form>
 
 EventForm.propTypes = {
   eventDetails: React.PropTypes.object.isRequired,
