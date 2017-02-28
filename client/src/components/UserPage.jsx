@@ -29,7 +29,6 @@ class UserPage extends Component {
       this.setState({ eventList: events });
       this.setState({ detailsBox: events[0] });
     }).catch(err => console.log(err));
-
   }
   /**
    *

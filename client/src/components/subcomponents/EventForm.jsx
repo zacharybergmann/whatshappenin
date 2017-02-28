@@ -112,4 +112,14 @@ const EventForm = ({
         <RaisedButton type="submit" label="make an Event" />
       </div>
     </form>;
+
+EventForm.propTypes = {
+  eventDetails: React.PropTypes.object.isRequired,
+  eveChange: React.PropTypes.func.isRequired,
+  processForm: React.PropTypes.func.isRequired,
+  handleTime: React.PropTypes.func.isRequired,
+  handleDate: React.PropTypes.func.isRequired,
+  location: React.PropTypes.object.isRequired,
+};
+
 export default EventForm;

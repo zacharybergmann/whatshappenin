@@ -13,8 +13,9 @@ const EventList = ({ eventlist, setDetailsBox, setCoordinates }) =>
     )}
   </div>;
 
-// EventList.propTypes = {
-//   eventlist: React.Proptypes.Array.isRequired,
-//   setDetailsBox: React.Proptypes.isRequired,
-// };
+EventList.propTypes = {
+  eventlist: React.PropTypes.array.isRequired,
+  setDetailsBox: React.PropTypes.func.isRequired,
+  setCoordinates: React.PropTypes.func.isRequired,
+};
 export default EventList;

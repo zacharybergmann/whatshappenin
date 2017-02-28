@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Auth from '../modules/Auth';
+import Auth from '../modules/Auth.js';
 import LoginForm from '../components/LoginForm.jsx';
 /* global localStorage, XMLHttpRequest */
 
@@ -34,6 +34,27 @@ class LoginPage extends React.Component {
     this.changeUser = this.changeUser.bind(this);
   }
 
+
+  componentWillUpdate(nextprops, nextState) {
+    localStorage.setItem('email', nextState.user.email);
+    fetch('/users', { method: 'GET', body: { email: nextState.user.email } })
+      .then(username => this.setState(username));
+  }
+
+  /**
+   * Change the user object.
+   *
+   * @param {object} event - the JavaScript event object
+   */
+  changeUser(event) {
+    const field = event.target.name;
+    const user = this.state.user;
+    user[field] = event.target.value;
+
+    this.setState({
+      user,
+    });
+  }
   /**
    * Process the form.
    *
@@ -69,29 +90,6 @@ class LoginPage extends React.Component {
     });
   }
 
-  /**
-   * Change the user object.
-   *
-   * @param {object} event - the JavaScript event object
-   */
-  changeUser(event) {
-    const field = event.target.name;
-    const user = this.state.user;
-    user[field] = event.target.value;
-
-    this.setState({
-      user,
-    });
-  }
-  componentWillUpdate(nextprops, nextState) {
-    localStorage.setItem('email', nextState.user.email);
-    fetch('/users', { method: 'GET', body: { email: nextState.user.email } })
-      .then(username => this.setState(username));
-  }
-
-  /**
-   * Render the component.
-   */
   render() {
     return (
       <LoginForm

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Link, IndexLink } from 'react-router';
 import Auth from '../modules/Auth';
 
@@ -35,7 +35,7 @@ const Base = ({ children }) => (
 );
 
 Base.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: React.PropTypes.object.isRequired,
 };
 
 export default Base;

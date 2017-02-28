@@ -1,5 +1,4 @@
 import React from 'react';
-// import fetch from 'react-fetch';
 import { Gmaps, Marker, InfoWindow } from 'react-gmaps';
 
 class Map extends React.Component {
@@ -18,15 +17,15 @@ class Map extends React.Component {
   }
 
   static onDragEnd(e) {
-    console.log('onDragEnd', e);
+    console.warn('onDragEnd', e);
   }
 
   static onCloseClick() {
-    console.log('onCloseClick');
+    console.warn('onCloseClick');
   }
 
   static onClick(e) {
-    console.log('onClick', e);
+    console.warn('onClick', e);
   }
 
 
@@ -48,9 +47,7 @@ class Map extends React.Component {
       this.setState({ location: location.coords });
     });
   }
-
   componentWillReceiveProps(nextprops) {
-    console.log(this.state,'prior to change')
     if (nextprops.coordinates) {
       const latitude = +nextprops.coordinates.latitude;
       const longitude = +nextprops.coordinates.longitude;
@@ -61,19 +58,17 @@ class Map extends React.Component {
         },
       });
     }
-    console.log(this.state);
   }
-/**
- *
- * @param {event} form submission event
- * @param this, state, Takes the search position from state object
- *
- * @returns Sets the location of the map for a query, and sets the event form
- *          location parameter to the geolocation's coordinates.
- */
+  /**
+   *
+   * @param {event} form submission event
+   * @param this, state, Takes the search position from state object
+   *
+   * @returns Sets the location of the map for a query, and sets the event form
+   *          location parameter to the geolocation's coordinates.
+   */
   handleSubmit(event) {
     event.preventDefault();
-    console.log('submit', this.state.search)
     fetch(`http://maps.googleapis.com/maps/api/geocode/json?address=${this.state.search}`)
     .then(response => response.json())
     .then((json) => {
@@ -91,20 +86,7 @@ class Map extends React.Component {
       }
     });
   }
-  componentWillReceiveProps(nextprops) {
-    console.log(this.state,'prior to change')
-    if (nextprops.coordinates) {
-      const latitude = +nextprops.coordinates.latitude;
-      const longitude = +nextprops.coordinates.longitude;
-      this.setState({
-        location: {
-          latitude: latitude,
-          longitude: longitude,
-        },
-      });
-    }
-    console.log(this.state);
-  }
+
 /**
  *
  * @param {event} form submission event
@@ -150,4 +132,6 @@ class Map extends React.Component {
     );
   }
 }
+
+
 export default Map;

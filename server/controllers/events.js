@@ -5,7 +5,7 @@ const Events = {
     Event(event).save();
   },
   findAll() {
-    return Event.find()
+    return Event.find();
   },
   findUserevent(user) {
     return Event.find().where({ username: user })
