@@ -195,7 +195,6 @@ class ProfilePage extends React.Component {
           <section id="map">
             {this.state.successMessage &&
               <CardText className="success-message">{this.state.successMessage}</CardText>}
-
             <RaisedButton
               label="makeevent"
               onTouchTap={this.handleToggle}

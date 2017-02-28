@@ -133,6 +133,7 @@ EventForm.propTypes = {
   handleDate: React.PropTypes.func.isRequired,
   closeDrawer: React.PropTypes.func.isRequired,
   location: React.PropTypes.object.isRequired,
+  errors: React.PropTypes.object.isRequired,
 };
 
 export default EventForm;
