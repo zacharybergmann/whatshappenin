@@ -1,5 +1,4 @@
 import React from 'react';
-// import fetch from 'react-fetch';
 import { Gmaps, Marker, InfoWindow } from 'react-gmaps';
 
 class Map extends React.Component {
@@ -18,16 +17,17 @@ class Map extends React.Component {
   }
 
   static onDragEnd(e) {
-    console.log('onDragEnd', e);
+    console.warn('onDragEnd', e);
   }
 
   static onCloseClick() {
-    console.log('onCloseClick');
+    console.warn('onCloseClick');
   }
 
   static onClick(e) {
-    console.log('onClick', e);
+    console.warn('onClick', e);
   }
+
 
   constructor(props) {
     super(props);
@@ -46,11 +46,6 @@ class Map extends React.Component {
     navigator.geolocation.getCurrentPosition((location) => {
       this.setState({ location: location.coords });
     });
-    // fetch('/googlekey')
-    // .then(response => response.json())
-    // .then((key) => {
-    //   this.setState({ googleKey: key });
-    // });
   }
   componentWillReceiveProps(nextprops) {
     if (nextprops.coordinates) {
@@ -58,16 +53,22 @@ class Map extends React.Component {
       const longitude = +nextprops.coordinates.longitude;
       this.setState({
         location: {
-          latitude,
-          longitude,
+          latitude: latitude,
+          longitude: longitude,
         },
       });
     }
   }
-
+  /**
+   *
+   * @param {event} form submission event
+   * @param this, state, Takes the search position from state object
+   *
+   * @returns Sets the location of the map for a query, and sets the event form
+   *          location parameter to the geolocation's coordinates.
+   */
   handleSubmit(event) {
     event.preventDefault();
-
     fetch(`http://maps.googleapis.com/maps/api/geocode/json?address=${this.state.search}`)
     .then(response => response.json())
     .then((json) => {
@@ -86,7 +87,14 @@ class Map extends React.Component {
     });
   }
 
-
+/**
+ *
+ * @param {event} form submission event
+ * @param this, state, Takes the search position from state object
+ *
+ * @returns Sets the location of the map for a query, and sets the event form
+ *          location parameter to the geolocation's coordinates.
+ */
   handleChange(event) {
     this.setState({ search: event.target.value });
   }
@@ -105,7 +113,7 @@ class Map extends React.Component {
           lng={this.state.location.longitude}
           zoom={12}
           loadingMessage={'Be happy'}
-          params={{ v: '3.exp', key: this.state.googleKey }}
+          params={{ v: '3.exp', key: 'AIzaSyDr0vzKpPyWUghywsRJI9PXgOtNkVs2u3g' }}
           onMapCreated={this.onMapCreated}
         >
           <Marker
@@ -117,7 +125,6 @@ class Map extends React.Component {
           <InfoWindow
             lat={this.state.location.latitude}
             lng={this.state.location.longitude}
-            content={'Hello, React :)'}
             onCloseClick={this.onCloseClick}
           />
         </Gmaps>
@@ -125,4 +132,6 @@ class Map extends React.Component {
     );
   }
 }
+
+
 export default Map;

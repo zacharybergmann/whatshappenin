@@ -1,20 +1,12 @@
 import React from 'react';
 import { CardText } from 'material-ui/Card';
-import Auth from '../modules/Auth';
+import Auth from '../modules/Auth.js';
 import EventList from '../components/subcomponents/eventList.jsx';
 import EventForm from '../components/subcomponents/EventForm.jsx';
 import EventDetail from '../components/subcomponents/EventDetail.jsx';
 import Map from '../components/subcomponents/Map.jsx';
-import Event from '../components/subcomponents/Event.jsx';
-
-
-/* global localStorage, XMLHttpRequest */
 
 class ProfilePage extends React.Component {
-
-  /**
-   * Class constructor.
-   */
   constructor(props) {
     super(props);
     this.state = {
@@ -58,7 +50,7 @@ class ProfilePage extends React.Component {
     .then((events) => {
       this.setState({ eventList: events });
       this.setState({ detailsBox: events[0] });
-    }).catch(err => console.log(err));
+    }).catch(err => console.error(err));
   }
   /**
    *
@@ -136,8 +128,10 @@ class ProfilePage extends React.Component {
     const picLink = encodeURIComponent(eveDet.picLink);
     const busLink = encodeURIComponent(eveDet.busLink);
     const description = encodeURIComponent(eveDet.description);
-    const location = encodeURIComponent(`longitude: ${eveDet.location.longitude} , latitude: ${eveDet.location.latitude}`)
-    const formData = `title=${title}&eventTime=${eventTime}&eventDate=${eventDate}&tags=${tags}&businessName=${businessName}&picLink=${picLink}&busLink=${busLink}&description=${description}&location=${location}`;
+    const location = encodeURIComponent(`longitude: ${eveDet.location.longitude}
+       , latitude: ${eveDet.location.latitude}`);
+    const formData = `title=${title}&eventTime=${eventTime}&eventDate=${eventDate}&tags=${tags}&businessName=${businessName}&picLink=
+        ${picLink}&busLink=${busLink}&description=${description}&location=${location}`;
     fetch('/api/makeevent', {
       method: 'POST',
       headers: new Headers({
