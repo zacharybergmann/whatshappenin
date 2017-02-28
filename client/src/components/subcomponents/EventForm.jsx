@@ -52,7 +52,7 @@ const EventForm = ({
           hintText="12hr Format"
           style={style}
           onChange={handleTime}
-          value={eventDetails.eventTime}
+          value={eventDetails.eventTimeObj}
           errorText={errors.eventTime}
         />
       </div>
@@ -63,7 +63,7 @@ const EventForm = ({
           name="eventDate"
           style={style}
           onChange={handleDate}
-          value={eventDetails.eventDate}
+          value={eventDetails.eventDateObj}
           errorText={errors.eventDate}
         />
       </div>

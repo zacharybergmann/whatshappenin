@@ -6,6 +6,9 @@ import EventForm from '../components/subcomponents/EventForm.jsx';
 import EventDetail from '../components/subcomponents/EventDetail.jsx';
 import Map from '../components/subcomponents/Map.jsx';
 
+/* global localStorage, XMLHttpRequest */
+
+
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
@@ -24,6 +27,8 @@ class ProfilePage extends React.Component {
         picLink: '',
         busLink: '',
         description: '',
+        eventTimeObj: '',
+        eventDateObj: '',
       },
       location: {
         longitude: null,
@@ -81,30 +86,46 @@ class ProfilePage extends React.Component {
   }
 
   /**
-   * Handles the TimePicker input from eventForm
+   * Handles the TimePicker input from eventForm, converts the date object
+   * into a string and transforms the military time into XX:XXpm format.
    *
    * @param {object} event - the JavaScript event object
-   * @param {string} - the time selected through the TimePicker
+   * @param {date object} - the time selected through the TimePicker
    */
   handleTime(event, time) {
+    function getFormattedTime(fourDigitTime) {
+      const hours24 = parseInt(fourDigitTime.substring(0, 2), 10);
+      const hours = ((hours24 + 11) % 12) + 1;
+      const amPm = hours24 > 11 ? 'pm' : 'am';
+      const minutes = fourDigitTime.substring(2);
+
+      return `${hours}:${minutes}${amPm}`;
+    }
+    const newTime = `${time.toString().slice(16, 21).replace(/:/, '')
+      .replace(/(\d+)/g, match => getFormattedTime(match))} ${time.toString().slice(34)}`;
+
     const ev = this.state.eventDetails;
-    ev.eventTime = time;
+    ev.eventTimeObj = time;
+    ev.eventTime = newTime;
     this.setState({
-      event: ev,
+      eventDetails: ev,
     });
   }
 
   /**
-   * Handles the TimePicker input from eventForm
+   * Handles the DatePicker input from eventForm, converts the date object
+   * into a string and slices out only the date portion.
    *
    * @param {object} event - the JavaScript event object
-   * @param {string} - the date selected through the DatePicker
+   * @param {date object} - the date selected through the DatePicker
    */
   handleDate(event, date) {
+    const newDate = date.toString().slice(0, 15);
     const ev = this.state.eventDetails;
-    ev.eventDate = date;
+    ev.eventDateObj = date;
+    ev.eventDate = newDate;
     this.setState({
-      event: ev,
+      eventDetails: ev,
     });
   }
 
