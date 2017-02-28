@@ -5,11 +5,14 @@ import EventList from '../components/subcomponents/eventList.jsx';
 import EventForm from '../components/subcomponents/EventForm.jsx';
 import EventDetail from '../components/subcomponents/EventDetail.jsx';
 import Map from '../components/subcomponents/Map.jsx';
+import Drawer from 'material-ui/Drawer';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      open: false,
       eventList: [],
       detailsBox: {
         name,
@@ -38,6 +41,7 @@ class ProfilePage extends React.Component {
     this.handleTime = this.handleTime.bind(this);
     this.handleDate = this.handleDate.bind(this);
     this.setCoordinates = this.setCoordinates.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   componentWillMount() {
@@ -150,6 +154,10 @@ class ProfilePage extends React.Component {
     .catch(err => `Whoops: ${err}`);
   }
 
+  handleToggle() {
+    this.setState({ open: !this.state.open });
+  }
+
   render() {
     return (
       <main className="container">
@@ -157,14 +165,25 @@ class ProfilePage extends React.Component {
           <section id="map">
             {this.state.successMessage &&
               <CardText className="success-message">{this.state.successMessage}</CardText>}
-            <EventForm
-              eventDetails={this.state.eventDetails}
-              eveChange={this.changeEvent}
-              processForm={this.processEventForm}
-              handleTime={this.handleTime}
-              handleDate={this.handleDate}
-              location={this.state.location}
+            <RaisedButton
+              label="makeevent"
+              onTouchTap={this.handleToggle}
             />
+            <Drawer
+              openSecondary
+              open={this.state.open}
+              width={400}
+            >
+              <EventForm
+                closeDrawer={this.handleToggle}
+                eventDetails={this.state.eventDetails}
+                eveChange={this.changeEvent}
+                processForm={this.processEventForm}
+                handleTime={this.handleTime}
+                handleDate={this.handleDate}
+                location={this.state.location}
+              />
+            </Drawer>
             <Map coordinates={this.state.location} geoCode={this.setCoordinates} />
             <EventDetail event={this.state.detailsBox} />
           </section>
