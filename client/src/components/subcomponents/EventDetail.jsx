@@ -42,18 +42,13 @@ const EventDetail = ({
           <img src={picLink}></img>
           <br />
           <a>{title}</a>
-
           <div>Event Time: {eventTime}</div>
-
           <div>Event Date: {eventDate}</div>
-
           <button type="button" onClick={setCoords}>Show Location on Map</button>
-
           {businessName !== '' && <div>Business: {businessName}</div>}
           {busLink !== '' && <a target="_blank" rel="noreferrer noopener" href={busLink}>Website</a>}
           <br />
           {/* <a onClick={setCoords}>Show Location on Map</a> */}
-
           <p>{description}</p>
           <div>{tags}</div>
         </div>
@@ -62,11 +57,7 @@ const EventDetail = ({
   );
 };
 
-
 // EventDetail.propTypes = {
-//   event: React.Proptypes.Object.isRequired,
+//   event: React.PropType.object.isRequired,
 // };
-//
-//
-
 export default EventDetail;
