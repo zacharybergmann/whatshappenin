@@ -1,4 +1,4 @@
-  import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 /**
 *
@@ -6,58 +6,66 @@
 * @returns parsed string, allows the map to be updated with new
 * coordinates when the event location is clicked;
 */
-  const parseCoordinates = function parseCoordinates(coordString) {
-    console.log(coordString,'coordinates')
-    let coordinates = coordString.split('longitude');
-    const coordinateObj = {
-      address: coordinates[0]
-    };
-    coordinates = coordinates[1].split(' ');
-    coordinateObj.latitude = +coordinates[coordinates.length - 1];
-    coordinateObj.longitude = +coordinates[1];
-
-    return coordinateObj;
+const parseCoordinates = function parseCoordinates(coordString) {
+  let coordinates = coordString.split('longitude');
+  const coordinateObj = {
+    address: coordinates[0]
   };
-  const Event = (props) => {
-  /* setDetailsBox passed down from Userpage
-   * @param {props.event} an event item
-   * @returns sets the Event details box to this event
-   */
-    const setDetailsBox = function setDetailsBox() {
-      props.setDetailsBox(props.event);
-    };
-    /* setCoordinates passed down from event page, from the map page
-     * @param {event location} an event item's location
-     * @returns sets the coordinates on profile/dashboard, and changes map coordinates
-     */
+  coordinates = coordinates[1].split(' ');
+  coordinateObj.latitude = +coordinates[coordinates.length - 1];
+  coordinateObj.longitude = +coordinates[1];
 
-    function setCoordinates() {
-      const coordinates = parseCoordinates(props.event.location);
-      props.setCoordinates(coordinates);
-    }
+  return coordinateObj;
+};
 
-    const addAttendee = function addAttendee() {
-      fetch('/addAttendee', { method: 'POST',
-        params: { username: localStorage.getItem('email'), event: props.event.title }
-      }).then((attended) => {
-        if (attended) {
-          props.event.attendees += 1;
-        }
-      });
-    };
-    return (
-      <article className="eventdetail">
-        <div className="eventlistbox">
-          <button type="button" >Display: {props.event.title} </button>
-          <div>EventTime: {props.event.time}.</div>
-          <button type="button" onClick={setCoordinates}>location:{props.event.location}</button>
-          <p>{props.event.description}</p>
-          <div>{props.event.tags}</div>
-        </div>
-      </article>
-    );
+const Event = ({ event, event: {
+  title,
+  eventTime,
+  username,
+  eventDate,
+  businessName,
+  busLink
+}, setCoordinates, setDetailsBox }) => {
+/* setDetailsBox passed down from mappage
+ * @param {props.event} an event item
+ * @returns sets the Event details box to this event
+ */
+  function setDetBox() {
+    setDetailsBox(event);
+  }
+
+  function setCoords() {
+    const coordinates = parseCoordinates(event.location);
+    setCoordinates(coordinates);
+  }
+
+  const addAttendee = function addAttendee() {
+    fetch('/addAttendee', { method: 'POST',
+      params: { username: localStorage.getItem('email'), event: event.title }
+    }).then((attended) => {
+      if (attended) {
+        event.attendees += 1;
+      }
+    });
   };
-  Event.propTypes = {
-    event: PropTypes.object.isRequired,
-  };
-  export default Event;
+  return (
+    <article className="eventdetail">
+      <div className="eventlistbox">
+        <a onClick={setDetBox}>{title}</a>
+        <div>Poster: {username}</div>
+        <div>Event Time: {eventTime}</div>
+        <div>Event Date: {eventDate}</div>
+        <a onClick={setCoords}>Show Location on Map</a>
+        {businessName !== '' && <div>Business: {businessName}</div>}
+        {busLink !== '' && <a target="_blank" rel="noreferrer noopener" href={busLink}>Website</a>}
+      </div>
+    </article>
+  );
+};
+
+
+Event.propTypes = {
+  event: PropTypes.object.isRequired,
+};
+
+export default Event;

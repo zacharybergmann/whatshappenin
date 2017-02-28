@@ -72,7 +72,8 @@ class Map extends React.Component {
    */
   handleSubmit(event) {
     event.preventDefault();
-    fetch(`http://maps.googleapis.com/maps/api/geocode/json?address=${this.state.search}`)
+
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.search}`)
     .then(response => response.json())
     .then((json) => {
       this.setState({

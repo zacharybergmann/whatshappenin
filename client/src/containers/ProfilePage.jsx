@@ -6,6 +6,9 @@ import EventForm from '../components/subcomponents/EventForm.jsx';
 import EventDetail from '../components/subcomponents/EventDetail.jsx';
 import Map from '../components/subcomponents/Map.jsx';
 
+/* global localStorage, XMLHttpRequest */
+
+
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
@@ -24,11 +27,14 @@ class ProfilePage extends React.Component {
         picLink: '',
         busLink: '',
         description: '',
+        eventTimeObj: '',
+        eventDateObj: '',
       },
       location: {
         longitude: null,
         latitude: null,
       },
+      errors: {},
       successMessage: null,
     };
 
@@ -61,8 +67,8 @@ class ProfilePage extends React.Component {
     this.setState({ detailsBox });
   }
 
-  setCoordinates(location) {
-    this.setState({ location });
+  setCoordinates(coordinates) {
+    this.setState({ location: coordinates });
   }
   /**
    * Change the eventDetails object.
@@ -80,30 +86,46 @@ class ProfilePage extends React.Component {
   }
 
   /**
-   * Handles the TimePicker input from eventForm
+   * Handles the TimePicker input from eventForm, converts the date object
+   * into a string and transforms the military time into XX:XXpm format.
    *
    * @param {object} event - the JavaScript event object
-   * @param {string} - the time selected through the TimePicker
+   * @param {date object} - the time selected through the TimePicker
    */
   handleTime(event, time) {
+    function getFormattedTime(fourDigitTime) {
+      const hours24 = parseInt(fourDigitTime.substring(0, 2), 10);
+      const hours = ((hours24 + 11) % 12) + 1;
+      const amPm = hours24 > 11 ? 'pm' : 'am';
+      const minutes = fourDigitTime.substring(2);
+
+      return `${hours}:${minutes}${amPm}`;
+    }
+    const newTime = `${time.toString().slice(16, 21).replace(/:/, '')
+      .replace(/(\d+)/g, match => getFormattedTime(match))} ${time.toString().slice(34)}`;
+
     const ev = this.state.eventDetails;
-    ev.eventTime = time;
+    ev.eventTimeObj = time;
+    ev.eventTime = newTime;
     this.setState({
-      event: ev,
+      eventDetails: ev,
     });
   }
 
   /**
-   * Handles the TimePicker input from eventForm
+   * Handles the DatePicker input from eventForm, converts the date object
+   * into a string and slices out only the date portion.
    *
    * @param {object} event - the JavaScript event object
-   * @param {string} - the date selected through the DatePicker
+   * @param {date object} - the date selected through the DatePicker
    */
   handleDate(event, date) {
+    const newDate = date.toString().slice(0, 15);
     const ev = this.state.eventDetails;
-    ev.eventDate = date;
+    ev.eventDateObj = date;
+    ev.eventDate = newDate;
     this.setState({
-      event: ev,
+      eventDetails: ev,
     });
   }
 
@@ -130,9 +152,9 @@ class ProfilePage extends React.Component {
     const picLink = encodeURIComponent(eveDet.picLink);
     const busLink = encodeURIComponent(eveDet.busLink);
     const description = encodeURIComponent(eveDet.description);
-    const location = encodeURIComponent(`${eveDet.location.address}longitude: ${eveDet.location.longitude}
-       , latitude: ${eveDet.location.latitude}`);
-    const formData = `title=${title}&eventTime=${eventTime}&eventDate=${eventDate}&tags=${tags}&businessName=${businessName}&picLink=
+    const location = encodeURIComponent(`${eveDet.location.address}longitude: ${eveDet.location.longitude}\
+  , latitude: ${eveDet.location.latitude}`);
+    const formData = `title=${title}&eventTime=${eventTime}&eventDate=${eventDate}&tags=${tags}&businessName=${businessName}&picLink=\
         ${picLink}&busLink=${busLink}&description=${description}&location=${location}`;
     fetch('/api/makeevent', {
       method: 'POST',
@@ -143,9 +165,17 @@ class ProfilePage extends React.Component {
       body: formData,
     }).then(res => res.json())
     .then((res) => {
-      this.setState({
-        successMessage: res.message,
-      });
+      if (res.success === false) {
+        this.setState({
+          errors: res.errors,
+          successMessage: null,
+        });
+      } else {
+        this.setState({
+          errors: {},
+          successMessage: res.message,
+        });
+      }
     })
     .catch(err => `Whoops: ${err}`);
   }
@@ -164,9 +194,10 @@ class ProfilePage extends React.Component {
               handleTime={this.handleTime}
               handleDate={this.handleDate}
               location={this.state.location}
+              errors={this.state.errors}
             />
             <Map coordinates={this.state.location} geoCode={this.setCoordinates} />
-            <EventDetail event={this.state.detailsBox} />
+            <EventDetail event={this.state.detailsBox} setCoordinates={this.setCoordinates} />
           </section>
           <section id="userprofile" className="col-lg-4" />
           <sidebar className="col-lg-4">
