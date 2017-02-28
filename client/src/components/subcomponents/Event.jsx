@@ -15,13 +15,18 @@ const parseCoordinates = function (coordString) {
   return coordinateObj;
 };
 const Event = (props) => {
-/* setDetailsBox passed down from mappage
+/* setDetailsBox passed down from Userpage
  * @param {props.event} an event item
  * @returns sets the Event details box to this event
  */
   function setDetailsBox() {
     props.setDetailsBox(props.event);
   }
+  /* setCoordinates passed down from event page, from the map page
+   * @param {event location} an event item's location
+   * @returns sets the coordinates on profile/dashboard, and changes map coordinates
+   */
+
   function setCoordinates() {
     const coordinates = parseCoordinates(props.event.location)
     props.setCoordinates(coordinates);
@@ -38,7 +43,7 @@ const Event = (props) => {
   return (
     <article className="eventdetail">
       <div className="eventlistbox">
-        <a onClick={setDetailsBox}>{props.event.title}</a>
+        <a onClick={setDetailsBox}>{props.event.name}</a>
         <div>EventTime: {props.event.time}.</div>
         <a onClick={setCoordinates}>location:{props.event.location}</a>
         <p>{props.event.description}</p>

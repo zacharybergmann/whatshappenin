@@ -64,7 +64,7 @@ class DashboardPage extends React.Component {
     this.setState({ detailsBox });
   }
 
-  /**
+/**
  *
  * @param {events} a list of event objects from query
  * @returns Sets the state eventlist to the array of events

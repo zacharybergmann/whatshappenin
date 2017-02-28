@@ -48,48 +48,7 @@ class Map extends React.Component {
       this.setState({ location: location.coords });
     });
   }
-  componentWillReceiveProps(nextprops) {
-    console.log(this.state,'prior to change')
-    if (nextprops.coordinates) {
-      const latitude = +nextprops.coordinates.latitude;
-      const longitude = +nextprops.coordinates.longitude;
-      this.setState({
-        location: {
-          latitude: latitude,
-          longitude: longitude,
-        },
-      });
-    }
-    console.log(this.state);
-  }
-  /**
- *
- * @param {event} form submission event
- * @param this, state, Takes the search position from state object
- *
- * @returns Sets the location of the map for a query, and sets the event form
- *          location parameter to the geolocation's coordinates.
- */
-  handleSubmit(event) {
-    event.preventDefault();
 
-    fetch(`http://maps.googleapis.com/maps/api/geocode/json?address=${this.state.search}`)
-    .then(response => response.json())
-    .then((json) => {
-      this.setState({
-        location: {
-          latitude: json.results[0].geometry.location.lat,
-          longitude: json.results[0].geometry.location.lng,
-        },
-      });
-      if (this.props.geoCode) {
-        this.props.geoCode({
-          latitude: json.results[0].geometry.location.lat,
-          longitude: json.results[0].geometry.location.lng,
-        });
-      }
-    });
-  }
   componentWillReceiveProps(nextprops) {
     console.log(this.state,'prior to change')
     if (nextprops.coordinates) {
@@ -104,10 +63,7 @@ class Map extends React.Component {
     }
     console.log(this.state);
   }
-  // shouldComponentUpdate(nextprops, nextstate) {
-  //   return this.state.longitude === nextstate.longitude;
-  // }
-  /**
+/**
  *
  * @param {event} form submission event
  * @param this, state, Takes the search position from state object
@@ -135,10 +91,28 @@ class Map extends React.Component {
       }
     });
   }
-  handleChange(event) {
-    this.setState({ search: event.target.value });
+  componentWillReceiveProps(nextprops) {
+    console.log(this.state,'prior to change')
+    if (nextprops.coordinates) {
+      const latitude = +nextprops.coordinates.latitude;
+      const longitude = +nextprops.coordinates.longitude;
+      this.setState({
+        location: {
+          latitude: latitude,
+          longitude: longitude,
+        },
+      });
+    }
+    console.log(this.state);
   }
-
+/**
+ *
+ * @param {event} form submission event
+ * @param this, state, Takes the search position from state object
+ *
+ * @returns Sets the location of the map for a query, and sets the event form
+ *          location parameter to the geolocation's coordinates.
+ */
   handleChange(event) {
     this.setState({ search: event.target.value });
   }

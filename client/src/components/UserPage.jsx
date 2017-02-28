@@ -17,7 +17,6 @@ class UserPage extends Component {
     };
     this.setDetailsBox = this.setDetailsBox.bind(this);
     this.setCoordinates = this.setCoordinates.bind(this);
-    this.geoCode = this.geoCode.bind(this);
   }
   componentWillMount() {
     /**
@@ -30,7 +29,7 @@ class UserPage extends Component {
       this.setState({ eventList: events });
       this.setState({ detailsBox: events[0] });
     }).catch(err => console.log(err));
-    
+
   }
   /**
    *
