@@ -7,8 +7,8 @@ import EventList from './subcomponents/eventList.jsx';
 const Dashboard = ({ data, setEveList, setDetBox, setCoordinates, coordinates }) => (
   <Card className="container">
     <CardTitle
-      title="Dashboard"
-      subtitle="You should get access to this page only after authentication."
+      title="Whats Happenin'"
+      subtitle="Find local hit events!"
     />
     <div>
       <section id="eventpagebody">

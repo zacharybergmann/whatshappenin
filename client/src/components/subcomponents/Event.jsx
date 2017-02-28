@@ -7,11 +7,15 @@
 * coordinates when the event location is clicked;
 */
   const parseCoordinates = function parseCoordinates(coordString) {
-    const coordinates = coordString.split(' ');
+    console.log(coordString,'coordinates')
+    let coordinates = coordString.split('longitude');
     const coordinateObj = {
-      latitude: +coordinates[4],
-      longitude: +coordinates[1],
+      address: coordinates[0]
     };
+    coordinates = coordinates[1].split(' ');
+    coordinateObj.latitude = +coordinates[coordinates.length - 1];
+    coordinateObj.longitude = +coordinates[1];
+
     return coordinateObj;
   };
   const Event = (props) => {
