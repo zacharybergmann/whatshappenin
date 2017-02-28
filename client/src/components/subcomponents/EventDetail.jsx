@@ -1,54 +1,56 @@
 import React from 'react';
-
-
-const parseCoordinates = (coordString) => {
-  const coordinates = coordString.split(' ');
+/**
+*
+* @param {coordinate string} will be a set of coordinates
+* @returns parsed string, allows the map to be updated with new
+* coordinates when the event location is clicked;
+*/
+const parseCoordinates = function parseCoordinates(coordString) {
+  let coordinates = coordString.split('longitude');
   const coordinateObj = {
-    latitude: +coordinates[4],
-    longitude: +coordinates[1],
+    address: coordinates[0]
   };
+  coordinates = coordinates[1].split(' ');
+  coordinateObj.latitude = +coordinates[coordinates.length - 1];
+  coordinateObj.longitude = +coordinates[1];
   return coordinateObj;
 };
 
-
-const EventDetail = ({
-  event: {
-    picLink,
-    title,
-    eventTime,
-    eventDate,
-    businessName,
-    busLink,
-    description,
-    tags,
-  },
-  setCoordinates,
-}) => {
-  function setCoords() {
+const EventDetail = ({ event: { name,
+  eventTime,
+  eventDate,
+  picLink,
+  title,
+  location,
+  description,
+  tags,
+  businessName,
+  busLink },
+  setCoords }) => {
+  /* setMap passed down from event page, from the map page
+   * @param {event location} an event item's location
+   * @returns sets the coordinates on profile/dashboard, and changes map coordinates
+   */
+  function setMap() {
     const coordinates = parseCoordinates(location);
     setCoordinates(coordinates);
   }
 
   return (
     <article className="eventdetail">
-
+      <img alt="" id="image" className="col-sm-2" />
       <section className="eventdescription">
         <div className="col-md-3">
           <img src={picLink}></img>
           <br />
           <a>{title}</a>
-
           <div>Event Time: {eventTime}</div>
-
           <div>Event Date: {eventDate}</div>
-
-          <a onClick={setCoords}>Show Location on Map</a>
-
+          <button type="button" onClick={setMap}>Show Location on Map</button>
           {businessName !== '' && <div>Business: {businessName}</div>}
           {busLink !== '' && <a target="_blank" rel="noreferrer noopener" href={busLink}>Website</a>}
           <br />
           {/* <a onClick={setCoords}>Show Location on Map</a> */}
-
           <p>{description}</p>
           <div>{tags}</div>
         </div>
@@ -56,12 +58,5 @@ const EventDetail = ({
     </article>
   );
 };
-
-
-// EventDetail.propTypes = {
-//   event: React.Proptypes.Object.isRequired,
-// };
-//
-//
 
 export default EventDetail;

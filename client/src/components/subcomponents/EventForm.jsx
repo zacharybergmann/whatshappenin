@@ -17,8 +17,7 @@ const EventForm = ({
   handleDate,
   location,
   errors,
-}) => {
-  return (
+  closeDrawer }) =>
     <form action="/" onSubmit={processForm}>
       <div>
         <TextField
@@ -28,21 +27,20 @@ const EventForm = ({
           style={style}
           value={eventDetails.title}
           onChange={eveChange}
-          errorText={errors.title}
         />
       </div>
       <div>
         <TextField
+          multiLine
           id="locationslot"
           name="location"
           type="location"
           hintText="Where tha party at?!"
           style={style}
-          value={`${location.address}
-          longitude: ${location.longitude},
+          value={`${location.address}\
+          longitude: ${location.longitude},\
           latitude: ${location.latitude}`}
           onChange={eveChange}
-          errorText={errors.location}
         />
       </div>
       <div>
@@ -52,19 +50,17 @@ const EventForm = ({
           hintText="12hr Format"
           style={style}
           onChange={handleTime}
-          value={eventDetails.eventTimeObj}
-          errorText={errors.eventTime}
+          value={eventDetails.eventTime}
         />
       </div>
       <div>
         <DatePicker
           type="eventDate"
-          hintText="Date"
+          hintText="Portrait Dialog"
           name="eventDate"
           style={style}
           onChange={handleDate}
-          value={eventDetails.eventDateObj}
-          errorText={errors.eventDate}
+          value={eventDetails.eventDate}
         />
       </div>
       <div>
@@ -75,7 +71,6 @@ const EventForm = ({
           style={style}
           value={eventDetails.picLink}
           onChange={eveChange}
-          errorText={errors.picLink}
         />
       </div>
       <div>
@@ -86,14 +81,13 @@ const EventForm = ({
           style={style}
           value={eventDetails.busLink}
           onChange={eveChange}
-          errorText={errors.busLink}
         />
       </div>
       <div>
         <TextField
           name="businessName"
           type="businessName"
-          hintText="What's your business' name?"
+          hintText="Are you a business? What's your name?"
           style={style}
           value={eventDetails.businessName}
           onChange={eveChange}
@@ -101,6 +95,7 @@ const EventForm = ({
       </div>
       <div>
         <TextField
+          multiLine
           name="tags"
           type="tags"
           hintText="tags"
@@ -111,6 +106,7 @@ const EventForm = ({
       </div>
       <div>
         <TextField
+          multiLine
           name="description"
           type="description"
           hintText="Describe your sweet event"
@@ -120,11 +116,9 @@ const EventForm = ({
         />
       </div>
       <div>
-        <RaisedButton type="submit" label="make an Event" />
+        <RaisedButton onClick={closeDrawer} type="submit" label="Post Event" />
       </div>
-    </form>
-  );
-};
+    </form>;
 
 EventForm.propTypes = {
   eventDetails: React.PropTypes.object.isRequired,
@@ -132,7 +126,9 @@ EventForm.propTypes = {
   processForm: React.PropTypes.func.isRequired,
   handleTime: React.PropTypes.func.isRequired,
   handleDate: React.PropTypes.func.isRequired,
+  closeDrawer: React.PropTypes.func.isRequired,
   location: React.PropTypes.object.isRequired,
+  errors: React.PropTypes.object.isRequired,
 };
 
 export default EventForm;

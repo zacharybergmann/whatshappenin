@@ -5,7 +5,7 @@ const EventList = ({ eventlist, setDetailsBox, setCoordinates }) =>
   <div>
     {eventlist.map(event =>
       <Event
-        key={event.id}
+        key={event._id}
         setCoordinates={setCoordinates}
         setDetailsBox={setDetailsBox}
         event={event}

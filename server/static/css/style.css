@@ -85,6 +85,29 @@ sidebar {
     max-height: 900px;
     overflow-y: scroll;
 }
-div.top-bar {
-  background-color:
+div#top-bar {
+  background-color: lime-green;
+}
+#react-app {
+  background-color: rgb(148, 236, 0);
+  min-height : 900px;
+}
+.cardTitle {
+  background-color: green;
+}
+#eventpagebody {
+  background-color: limegreen;
+}
+a {
+  color : white;
+}
+#map {
+  max-width: 500px
+}
+form {
+  background-color: white;
+
+}
+.container {
+  background-color: limegreen;
 }
