@@ -13,13 +13,20 @@ const parseCoordinates = function parseCoordinates(coordString) {
   coordinates = coordinates[1].split(' ');
   coordinateObj.latitude = +coordinates[coordinates.length - 1];
   coordinateObj.longitude = +coordinates[1];
-<<<<<<< HEAD
-=======
   return coordinateObj;
->>>>>>> 3069014f4921368deb9c97b0ae9412092c8a68c1
 };
 
-const EventDetail = ({ event: { name, time, location, description, tags }, setCoordinates }) => {
+const EventDetail = ({ event: { name,
+  eventTime,
+  eventDate,
+  picLink,
+  title,
+  location,
+  description,
+  tags,
+  businessName,
+  busLink },
+  setCoords }) => {
   /* setMap passed down from event page, from the map page
    * @param {event location} an event item's location
    * @returns sets the coordinates on profile/dashboard, and changes map coordinates
@@ -39,7 +46,7 @@ const EventDetail = ({ event: { name, time, location, description, tags }, setCo
           <a>{title}</a>
           <div>Event Time: {eventTime}</div>
           <div>Event Date: {eventDate}</div>
-          <button type="button" onClick={setCoords}>Show Location on Map</button>
+          <button type="button" onClick={setMap}>Show Location on Map</button>
           {businessName !== '' && <div>Business: {businessName}</div>}
           {busLink !== '' && <a target="_blank" rel="noreferrer noopener" href={busLink}>Website</a>}
           <br />
