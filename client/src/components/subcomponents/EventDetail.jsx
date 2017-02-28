@@ -48,10 +48,7 @@ const EventDetail = ({ event: { name, time, location, description, tags }, setCo
     </article>
   );
 };
-<<<<<<< HEAD
 
-=======
->>>>>>> 3dd3aa720f06089032ed8024f15ae0fb68d829bb
 // EventDetail.propTypes = {
 //   event: React.PropType.object.isRequired,
 // };
