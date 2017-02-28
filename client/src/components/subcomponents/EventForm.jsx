@@ -17,8 +17,7 @@ const EventForm = ({
   handleDate,
   location,
   errors,
-}) => {
-  return (
+  closeDrawer }) =>
     <form action="/" onSubmit={processForm}>
       <div>
         <TextField
@@ -33,6 +32,7 @@ const EventForm = ({
       </div>
       <div>
         <TextField
+          multiLine
           id="locationslot"
           name="location"
           type="location"
@@ -101,6 +101,7 @@ const EventForm = ({
       </div>
       <div>
         <TextField
+          multiLine
           name="tags"
           type="tags"
           hintText="tags"
@@ -111,6 +112,7 @@ const EventForm = ({
       </div>
       <div>
         <TextField
+          multiLine
           name="description"
           type="description"
           hintText="Describe your sweet event"
@@ -120,7 +122,7 @@ const EventForm = ({
         />
       </div>
       <div>
-        <RaisedButton type="submit" label="make an Event" />
+        <RaisedButton onClick={closeDrawer} type="submit" label="Post Event" />
       </div>
     </form>
   );
@@ -132,7 +134,9 @@ EventForm.propTypes = {
   processForm: React.PropTypes.func.isRequired,
   handleTime: React.PropTypes.func.isRequired,
   handleDate: React.PropTypes.func.isRequired,
+  closeDrawer: React.PropTypes.func.isRequired,
   location: React.PropTypes.object.isRequired,
+  errors: React.PropTypes.object.isRequired,
 };
 
 export default EventForm;
