@@ -4,10 +4,6 @@ const passport = require('passport');
 const Event = require('./server/controllers/events');
 const Path = require('path');
 const User = require('./server/models/user.js');
-<<<<<<< HEAD
-
-=======
->>>>>>> f16b0f980a367c6c48bf7f570770854051494f7a
 require('dotenv').config();
 // connect to the database and load models
 require('./server/models').connect(process.env.EPMONGO || process.env.MONGO_KEY);
@@ -45,8 +41,6 @@ app.get('/googlekey', (req, res) => {
 });
 
 app.post('/makeevent', (req, res) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
   console.log(req.body, 'event body');
   Event.createEvent(req.body);
   res.send('event made');
