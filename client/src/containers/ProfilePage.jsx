@@ -20,8 +20,8 @@ class ProfilePage extends React.Component {
       eventDetails: {
         username: '',
         title: '',
-        eventTime: {},
-        eventDate: {},
+        eventTime: '',
+        eventDate: '',
         tags: '',
         businessName: '',
         picLink: '',

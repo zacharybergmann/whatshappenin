@@ -17,7 +17,7 @@ const EventForm = ({
   handleDate,
   location,
   errors,
-  closeDrawer }) =>
+  }) =>
     <form action="/" onSubmit={processForm}>
       <div>
         <TextField
@@ -42,6 +42,7 @@ const EventForm = ({
           longitude: ${location.longitude}, \
           latitude: ${location.latitude}`}
           onChange={eveChange}
+          errorText={errors.location}
         />
       </div>
       <div>
@@ -74,6 +75,7 @@ const EventForm = ({
           style={style}
           value={eventDetails.picLink}
           onChange={eveChange}
+          errorText={errors.picLink}
         />
       </div>
       <div>
@@ -84,6 +86,7 @@ const EventForm = ({
           style={style}
           value={eventDetails.busLink}
           onChange={eveChange}
+          errorText={errors.busLink}
         />
       </div>
       <div>
@@ -119,7 +122,7 @@ const EventForm = ({
         />
       </div>
       <div>
-        <RaisedButton  type="submit" label="Post Event" />
+        <RaisedButton type="submit" label="Post Event" />
       </div>
     </form>;
 
