@@ -29,7 +29,7 @@ const EventDetail = ({ event: { name,
   busLink,
   eventTimeObj,
   eventDateObj,
-},
+  },
   setCoordinates }) => {
   /* setMap passed down from event page, from the map page
    * @param {event location} an event item's location

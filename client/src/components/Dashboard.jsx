@@ -15,7 +15,7 @@ const Dashboard = ({ data, setEveList, setDetBox, setCoordinates, coordinates })
       <section id="eventpagebody">
         <section id="map" className="col-lg-4">
           <section >
-            <Map setCoordinates={setCoordinates} coordinates={coordinates} />
+            <Map geoCode={setCoordinates} coordinates={coordinates} />
             <article id="EventDetail">
               <EventDetail setCoordinates={setCoordinates} event={data.detailsBox} />
             </article>
@@ -39,7 +39,6 @@ Dashboard.propTypes = {
   setEveList: React.PropTypes.func.isRequired,
   setDetBox: React.PropTypes.func.isRequired,
   setCoordinates: React.PropTypes.func.isRequired,
-  coordinates: React.PropTypes.object.isRequired,
 };
 
 export default Dashboard;
