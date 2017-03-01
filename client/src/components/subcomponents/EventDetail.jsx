@@ -16,6 +16,7 @@ const parseCoordinates = function parseCoordinates(coordString) {
   return coordinateObj;
 };
 
+
 const EventDetail = ({ event: { name,
   eventTime,
   eventDate,
@@ -25,8 +26,11 @@ const EventDetail = ({ event: { name,
   description,
   tags,
   businessName,
-  busLink },
-  setCoords }) => {
+  busLink,
+  eventTimeObj,
+  eventDateObj,
+},
+  setCoordinates }) => {
   /* setMap passed down from event page, from the map page
    * @param {event location} an event item's location
    * @returns sets the coordinates on profile/dashboard, and changes map coordinates
@@ -36,27 +40,47 @@ const EventDetail = ({ event: { name,
     setCoordinates(coordinates);
   }
 
+  /**
+   * Constructs a url link to the google calender 'add event' page for the clicked event
+   * and opens the link in a new tab in the browser
+   *
+   */
+  function linkToCalender() {
+    const dateTime = `${eventDateObj.slice(0, 10)}T${eventTimeObj.slice(11)}`
+      .replace(/-|:|\.\d\d\d/g, '');
+    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title.replace(' ', '+')}&dates=${dateTime}/${dateTime}&details=${description.replace(' ', '+')}&location=${location.split('longitude')[0].replace(' ', '+').replace(',', '')}&sf=true&output=xml`;
+
+    window.open(url);
+  }
+
   return (
     <article className="eventdetail">
       <img alt="" id="image" className="col-sm-2" />
       <section className="eventdescription">
         <div className="col-md-3">
-          <img src={picLink}></img>
+          <img className="image" alt="" src={picLink} />
           <br />
           <a>{title}</a>
           <div>Event Time: {eventTime}</div>
           <div>Event Date: {eventDate}</div>
+
           <button type="button" onClick={setMap}>Show Location on Map</button>
+
           {businessName !== '' && <div>Business: {businessName}</div>}
           {busLink !== '' && <a target="_blank" rel="noreferrer noopener" href={busLink}>Website</a>}
           <br />
-          {/* <a onClick={setCoords}>Show Location on Map</a> */}
+
           <p>{description}</p>
           <div>{tags}</div>
+          <button type="button" onClick={linkToCalender} >Add to Your Calender</button>
         </div>
       </section>
     </article>
   );
 };
+
+// EventDetail.propTypes = {
+//   event: React.Proptypes.object.isRequired,
+// };
 
 export default EventDetail;

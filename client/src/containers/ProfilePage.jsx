@@ -20,8 +20,8 @@ class ProfilePage extends React.Component {
       eventDetails: {
         username: '',
         title: '',
-        eventTime: {},
-        eventDate: {},
+        eventTime: '',
+        eventDate: '',
         tags: '',
         businessName: '',
         picLink: '',
@@ -33,6 +33,7 @@ class ProfilePage extends React.Component {
       location: {
         longitude: null,
         latitude: null,
+        address: null,
       },
       errors: {},
       successMessage: null,
@@ -94,16 +95,8 @@ class ProfilePage extends React.Component {
    * @param {date object} - the time selected through the TimePicker
    */
   handleTime(event, time) {
-    function getFormattedTime(fourDigitTime) {
-      const hours24 = parseInt(fourDigitTime.substring(0, 2), 10);
-      const hours = ((hours24 + 11) % 12) + 1;
-      const amPm = hours24 > 11 ? 'pm' : 'am';
-      const minutes = fourDigitTime.substring(2);
-
-      return `${hours}:${minutes}${amPm}`;
-    }
-    const newTime = `${time.toString().slice(16, 21).replace(/:/, '')
-      .replace(/(\d+)/g, match => getFormattedTime(match))} ${time.toString().slice(34)}`;
+    let newTime = time.toLocaleString().split(',')[1].trim();
+    newTime = `${newTime.slice(0, 4)} ${newTime.slice(newTime.length - 2)}`;
 
     const ev = this.state.eventDetails;
     ev.eventTimeObj = time;
@@ -138,7 +131,6 @@ class ProfilePage extends React.Component {
   processEventForm(event) {
     event.preventDefault();
     const eveDet = this.state.eventDetails;
-    console.log(this.state.location);
     eveDet.location = {
       longitude: this.state.location.longitude,
       latitude: this.state.location.latitude,
@@ -153,10 +145,14 @@ class ProfilePage extends React.Component {
     const picLink = encodeURIComponent(eveDet.picLink);
     const busLink = encodeURIComponent(eveDet.busLink);
     const description = encodeURIComponent(eveDet.description);
-    const location = encodeURIComponent(`${eveDet.location.address}longitude: ${eveDet.location.longitude}\
+    const eventTimeObj = eveDet.eventTimeObj;
+    const eventDateObj = eveDet.eventDateObj;
+    const location = encodeURIComponent(`${eveDet.location.address} longitude: ${eveDet.location.longitude} \
   , latitude: ${eveDet.location.latitude}`);
-    const formData = `title=${title}&eventTime=${eventTime}&eventDate=${eventDate}&tags=${tags}&businessName=${businessName}&picLink=\
-        ${picLink}&busLink=${busLink}&description=${description}&location=${location}`;
+    const formData = `title=${title}&eventTime=${eventTime}&eventDate=${eventDate}\
+      &tags=${tags}&businessName=${businessName}&picLink=${picLink}&busLink=${busLink}\
+      &description=${description}&location=${location}&eventTimeObj=${eventTimeObj}\
+      &eventDateObj=${eventDateObj}`;
     fetch('/api/makeevent', {
       method: 'POST',
       headers: new Headers({
@@ -176,6 +172,7 @@ class ProfilePage extends React.Component {
           errors: {},
           successMessage: res.message,
         });
+        this.handleToggle();
       }
     })
     .catch(err => `Whoops: ${err}`);

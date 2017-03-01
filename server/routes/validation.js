@@ -82,6 +82,13 @@ module.exports = {
     };
   },
 
+  /**
+   * Validate the event form
+   *
+   * @param {object} payload - the HTTP body message
+   * @returns {object} The result of validation. Object contains a boolean validation result,
+   *                   errors tips, and a global message for the whole form.
+   */
   validateEventForm(payload) {
     const errors = {};
     let isFormValid = true;
@@ -92,7 +99,8 @@ module.exports = {
       errors.title = 'Please provide your party\'s title.';
     }
 
-    if (!payload || typeof payload.location !== 'string' || validator.contains(payload.location, 'null') || validator.contains(payload.location, 'undefined')) {
+    if (!payload || typeof payload.location !== 'string' || validator.contains(payload.location, 'null')
+      || validator.contains(payload.location, 'undefined')) {
       isFormValid = false;
       errors.title = 'Please provide your party\'s location.';
     }
@@ -110,11 +118,13 @@ module.exports = {
       errors.eventDate = 'That date has passed!';
     }
 
+    payload.picLink = payload.picLink.trim();
     if (payload.picLink !== '' && !validator.isURL(payload.picLink)) {
       isFormValid = false;
       errors.picLink = 'Please provide a valid link to your hosted image.';
     }
 
+    payload.busLink = payload.busLink.trim();
     if (payload.busLink !== '' && !validator.isURL(payload.busLink)) {
       isFormValid = false;
       errors.busLink = 'Please provide a valid link to your business.';

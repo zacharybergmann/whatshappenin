@@ -17,7 +17,7 @@ const EventForm = ({
   handleDate,
   location,
   errors,
-  closeDrawer }) =>
+  }) =>
     <form action="/" onSubmit={processForm}>
       <div>
         <TextField
@@ -27,6 +27,7 @@ const EventForm = ({
           style={style}
           value={eventDetails.title}
           onChange={eveChange}
+          errorText={errors.title}
         />
       </div>
       <div>
@@ -37,10 +38,11 @@ const EventForm = ({
           type="location"
           hintText="Where tha party at?!"
           style={style}
-          value={`${location.address}\
-          longitude: ${location.longitude},\
+          value={`${location.address} \
+          longitude: ${location.longitude}, \
           latitude: ${location.latitude}`}
           onChange={eveChange}
+          errorText={errors.location}
         />
       </div>
       <div>
@@ -50,7 +52,8 @@ const EventForm = ({
           hintText="12hr Format"
           style={style}
           onChange={handleTime}
-          value={eventDetails.eventTime}
+          value={eventDetails.eventTimeObj}
+          errorText={errors.eventTime}
         />
       </div>
       <div>
@@ -60,7 +63,8 @@ const EventForm = ({
           name="eventDate"
           style={style}
           onChange={handleDate}
-          value={eventDetails.eventDate}
+          value={eventDetails.eventDateObj}
+          errorText={errors.eventDate}
         />
       </div>
       <div>
@@ -71,6 +75,7 @@ const EventForm = ({
           style={style}
           value={eventDetails.picLink}
           onChange={eveChange}
+          errorText={errors.picLink}
         />
       </div>
       <div>
@@ -81,6 +86,7 @@ const EventForm = ({
           style={style}
           value={eventDetails.busLink}
           onChange={eveChange}
+          errorText={errors.busLink}
         />
       </div>
       <div>
@@ -116,7 +122,7 @@ const EventForm = ({
         />
       </div>
       <div>
-        <RaisedButton onClick={closeDrawer} type="submit" label="Post Event" />
+        <RaisedButton type="submit" label="Post Event" />
       </div>
     </form>;
 

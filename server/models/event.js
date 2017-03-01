@@ -13,6 +13,8 @@ const Events = new mongoose.Schema({
   busLink: String, // url to business' homepage
   description: String,
   attendees: {},
+  eventTimeObj: Date,
+  eventDateObj: Date,
 });
 
 const ev = mongoose.model('Events', Events);
