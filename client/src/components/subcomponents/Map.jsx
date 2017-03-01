@@ -45,7 +45,7 @@ class Map extends React.Component {
 
   componentWillMount() {
     navigator.geolocation.getCurrentPosition((location) => {
-      fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}`)
+      fetch(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}`)
       .then(response => response.json())
       .then((json) => {
         this.setStateGeoLocate(json);
@@ -84,7 +84,7 @@ class Map extends React.Component {
         address: json.results[0].formatted_address
       },
     });
-    this.props.setCoordinates({
+    this.props.geoCode({
       latitude: json.results[0].geometry.location.lat,
       longitude: json.results[0].geometry.location.lng,
       address: json.results[0].formatted_address,
