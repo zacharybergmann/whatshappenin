@@ -172,6 +172,7 @@ class ProfilePage extends React.Component {
           errors: {},
           successMessage: res.message,
         });
+        this.handleToggle();
       }
     })
     .catch(err => `Whoops: ${err}`);

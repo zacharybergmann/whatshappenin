@@ -77,9 +77,9 @@ article.eventdetail {
 #eventpagebody {
   display : flex;
 }
-#image {
-  max-width: 40px;
-  max-height: 40px;
+.image {
+  max-width: 100px;
+  max-height: 100px;
 }
 sidebar {
     max-height: 900px;

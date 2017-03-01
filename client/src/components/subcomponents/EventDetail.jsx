@@ -26,11 +26,11 @@ const EventDetail = ({ event: { name,
   description,
   tags,
   businessName,
-  busLink
+  busLink,
   eventTimeObj,
   eventDateObj,
 },
-  setCoords }) => {
+  setCoordinates }) => {
   /* setMap passed down from event page, from the map page
    * @param {event location} an event item's location
    * @returns sets the coordinates on profile/dashboard, and changes map coordinates
@@ -58,7 +58,7 @@ const EventDetail = ({ event: { name,
       <img alt="" id="image" className="col-sm-2" />
       <section className="eventdescription">
         <div className="col-md-3">
-          <img alt="" src={picLink} />
+          <img className="image" alt="" src={picLink} />
           <br />
           <a>{title}</a>
           <div>Event Time: {eventTime}</div>

@@ -27,6 +27,7 @@ const EventForm = ({
           style={style}
           value={eventDetails.title}
           onChange={eveChange}
+          errorText={errors.title}
         />
       </div>
       <div>
@@ -50,7 +51,8 @@ const EventForm = ({
           hintText="12hr Format"
           style={style}
           onChange={handleTime}
-          value={eventDetails.eventTime}
+          value={eventDetails.eventTimeObj}
+          errorText={errors.eventTime}
         />
       </div>
       <div>
@@ -60,7 +62,8 @@ const EventForm = ({
           name="eventDate"
           style={style}
           onChange={handleDate}
-          value={eventDetails.eventDate}
+          value={eventDetails.eventDateObj}
+          errorText={errors.eventDate}
         />
       </div>
       <div>
@@ -116,7 +119,7 @@ const EventForm = ({
         />
       </div>
       <div>
-        <RaisedButton onClick={closeDrawer} type="submit" label="Post Event" />
+        <RaisedButton  type="submit" label="Post Event" />
       </div>
     </form>;
 
